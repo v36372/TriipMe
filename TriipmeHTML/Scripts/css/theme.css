@@ -1,8 +1,10 @@
 ﻿#logoImage {
     margin-bottom:50px;
+    width:200px;
+    height:200px
 }
 body {
-    padding-top: 50px;
+    
     
 }
 .panel-login {
