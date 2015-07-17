@@ -39,7 +39,7 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera',function
 
         $cordovaCamera.getPicture(options).then(function(imageData) {
             $scope.imgURI = "data:image/jpeg;base64," + imageData;
-            newblog.img = imageData;
+            $scope.newblog.img = imageData;
         }, function(err) {
            console.log(err);
         });
