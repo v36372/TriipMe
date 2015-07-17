@@ -4,14 +4,12 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state',functio
     $scope.username = "nguyentrongtin2331@gmail.com";
     $scope.password = "admin";
 
-    console.log("asddas");
     $scope.login = function() {
         console.log($scope.username);
         console.log($scope.password);
         if($scope.username == "" || $scope.password == "")
             return;
-        var ref = new Firebase("https://triipme.firebaseio.com");
-        ref.authWithPassword({
+        fb.authWithPassword({
             email    : $scope.username,
             password : $scope.password
         }, function(error, authData) {
@@ -26,7 +24,9 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state',functio
                 //if (!$scope.$$phase) {
                 //    $scope.$apply(function() { $location.path("/home"); });
                 //}
-
+                fb.child("database").child("users").child(fb.getAuth().uid).child("name").once("value", function(data) {
+                    NameOfUser = data.val();
+                });
                 $state.go("home");
             }
         });

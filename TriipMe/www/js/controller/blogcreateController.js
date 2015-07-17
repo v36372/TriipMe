@@ -1,18 +1,13 @@
 TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera',function($scope,$cordovaCamera){
 
-    //$scope.title = "";
-    //$scope.desc = "";
-
     $scope.newblog = {};
     $scope.newblog.like = 0;
     $scope.newblog.cmt = 0;
+    $scope.newblog.time = (new Date()).getTime();
+    $scope.newblog.author = NameOfUser;
 
-    var dbRef = new Firebase("https://triipme.firebaseio.com/database");
-
-    $scope.createBlog = function(){
-        //newblog.title = $scope.title;
-        //newblog.desc = $scope.desc;
-        var blogsRef = dbRef.child("users").child(fb.getAuth().uid).child("blogs");
+        $scope.createBlog = function(){
+        var blogsRef = fb.child("database").child("users").child(fb.getAuth().uid).child("blogs");
         blogsRef.push($scope.newblog);
     };
 
