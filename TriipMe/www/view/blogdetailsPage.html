@@ -1,7 +1,42 @@
-<ion-view title="Blog Details">
+<ion-view style="font-size:medium" title="{{blog.title}}">
     <ion-content>
         <div class="list">
+            <div>
+                <img class="full-image" src="{{blog.img}}" />
+            </div>
+            <!--<ion-scroll direction="x" class="available-scroller">-->
+                <!--<div class="createBlog-list-photo" collection-repeat="img in blog.imgs"-->
+                     <!--item-height="250" item-width="300">-->
+                    <!--<img ng-src="{{img}}"/>-->
+                <!--</div>-->
+            <!--</ion-scroll>-->
+            <div class="card">
+                <div class="item item-text-wrap">
+                    {{blog.desc}}
+                </div>
+            </div>
+            <div class="card">
+            <div ng-repeat="event in blog.events">
+                <div class="item">
+                    <p>{{event.time}}</p>
+                </div>
+                <div class="list card">
+                    <div class="item item-body">
+                        <!--<img class="full-image" src="img/hong-kong.jpg">-->
+                        <ion-scroll direction="x" class="available-scroller">
+                            <div class="createBlog-list-photo" collection-repeat="img in event.imgs"
+                                 item-height="300" item-width="300">
+                                <img class="full-image" ng-src="{{img}}"/>
+                            </div>
+                        </ion-scroll>
+                        <p>
+                            {{event.desc}}
+                        </p>
+                    </div>
 
+                </div>
+            </div>
+            </div>
         </div>
     </ion-content>
 </ion-view>
