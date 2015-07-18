@@ -40,7 +40,7 @@ TriipMeApp.config(function($stateProvider, $urlRouterProvider) {
             params: {
                 blogid:{}
             },
-            url: "/edit",
+            url: "/blog",
             templateUrl: "view/blogdetailsPage.html",
             controller: "blogdetailsController",
             data: {'blogid':'blogid'}

@@ -1,7 +1,7 @@
 TriipMeApp.controller('homeController',['$scope','$state','$timeout',function($scope,$state,$timeout){
     if(fb.getAuth().uid == "")
         $state.go("login");
-
+    $scope.connected = true;
     $scope.redir = function(){
         //if (!$scope.$$phase) {
         //    $scope.$apply(function() { $location.path("/create"); });
@@ -25,6 +25,7 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout',function($s
     blogsRef.orderByChild("time").limitToLast(5).on("child_added", function(snapshot) {
         //var blog = {};
         //blog.title = snapshot.val()
+        $scope.connected = false;
         var blog = snapshot.val();
         blog.time = (new Date(blog.time)).toDateString();
         blog.id = snapshot.key();

@@ -1,8 +1,8 @@
-TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state',function($scope,$cordovaCamera,$state){
+TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state','$timeout',function($scope,$cordovaCamera,$state,$timeout){
     if(fb.getAuth().uid == "")
         $state.go("login");
 
-
+    console.log(fb.getAuth().uid);
     $scope.newblog = {};
     $scope.newblog.like = 0;
     $scope.newblog.cmt = 0;
@@ -11,17 +11,18 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
     $scope.photos=[];
     $scope.photo={};
 
-    for (var i = 0; i < 100; i++) {
-    $scope.photos.push({
-    width: 300,
-    height: 300,
-    src: 'http://placekitten.com/' + 299 + '/' + 300
-    });
-    };
+    //for (var i = 0; i < 100; i++) {
+    //    $scope.photos.push({
+    //        width: 300,
+    //        height: 300,
+    //        src: 'http://placekitten.com/' + 299 + '/' + 300
+    //    });
+    //};
 
     $scope.createBlog = function(){
-    var blogsRef = fb.child("database").child("users").child(fb.getAuth().uid).child("blogs");
-    blogsRef.push($scope.newblog);
+        var blogsRef = fb.child("database").child("users").child(fb.getAuth().uid).child("blogs");
+        blogsRef.push($scope.newblog);
+        //Camera.cleanup(null,null);
     };
 
     $scope.choosePicture = function(){
@@ -47,9 +48,9 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
         };
 
         $cordovaCamera.getPicture(options).then(function(imageData) {
-
-            $scope.imgURI = "data:image/jpeg;base64," + imageData;
+            var imgURI = "data:image/jpeg;base64," + imageData;
             $scope.newblog.img = imageData;
+            $scope.photos.push(imgURI);
         }, function(err) {
            console.log(err);
         });

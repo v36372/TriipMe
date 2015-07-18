@@ -1,12 +1,23 @@
-TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','userService',function($scope,$ionicPopup,$state,userService){
+TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$ionicLoading','userService',function($scope,$ionicPopup,$state,$ionicLoading,userService){
 
     // VARIABLES INITIALIZATION
     $scope.username = "nguyentrongtin2331@gmail.com";
     $scope.password = "admin";
 
+    $scope.show = function() {
+        $ionicLoading.show({
+            template: '<ion-spinner icon="lines" class="spinner-positive"></ion-spinner>'
+        });
+    };
+    $scope.hide = function(){
+        $ionicLoading.hide();
+    };
+
     $scope.login = function() {
         $scope.username = document.getElementById('userName').value;
         $scope.password = document.getElementById('password').value;
+        $scope.connected = true;
+        $scope.show();
         console.log($scope.username);
         console.log($scope.password);
         if($scope.username == "" || $scope.password == "")
@@ -15,6 +26,7 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','userSe
             email    : $scope.username,
             password : $scope.password
         }, function(error, authData) {
+            $scope.hide();
             if (error) {
                 console.log("Login Failed!", error);
                 $scope.showAlert();

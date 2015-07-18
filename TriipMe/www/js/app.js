@@ -1,5 +1,6 @@
 'use strict';
 
+//GLOBAL VARIABLES
 var fb = new Firebase("https://triipme.firebaseio.com");
 var TriipMeApp = angular.module('TriipMeApp', ['ionic','firebase','ngCordova']);
 var NameOfUser = "";
