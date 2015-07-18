@@ -5,10 +5,11 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera',function
     $scope.newblog.cmt = 0;
     $scope.newblog.time = (new Date()).getTime();
     $scope.newblog.author = NameOfUser;
-
-        $scope.createBlog = function(){
-        var blogsRef = fb.child("database").child("users").child(fb.getAuth().uid).child("blogs");
-        blogsRef.push($scope.newblog);
+    $scope.photos=[];
+    $scope.photo={};
+    $scope.createBlog = function(){
+    var blogsRef = fb.child("database").child("users").child(fb.getAuth().uid).child("blogs");
+    blogsRef.push($scope.newblog);
     };
 
     $scope.choosePicture = function(){
@@ -30,10 +31,17 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera',function
             targetHeight: 300,
             popoverOptions: CameraPopoverOptions,
             saveToPhotoAlbum: true
+
         };
 
         $cordovaCamera.getPicture(options).then(function(imageData) {
+
             $scope.imgURI = "data:image/jpeg;base64," + imageData;
+            $scope.photo.imgURI = $scope.imgURI;
+            $scope.photos.push($scope.photo);
+            $scope.photos.push($scope.photo);
+            $scope.photos.push($scope.photo);
+            $scope.photos.push($scope.photo);
             $scope.newblog.img = imageData;
         }, function(err) {
            console.log(err);
@@ -41,3 +49,4 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera',function
     }
 
 }]);
+
