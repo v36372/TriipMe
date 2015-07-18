@@ -1,6 +1,8 @@
 'use strict';
 
-var TriipMeApp = angular.module('TriipMeApp', ['ionic','ngRoute','firebase']);
+var fb = new Firebase("https://triipme.firebaseio.com");
+var TriipMeApp = angular.module('TriipMeApp', ['ionic','firebase','ngCordova']);
+var NameOfUser = "";
 
 TriipMeApp.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -14,3 +16,5 @@ TriipMeApp.run(function($ionicPlatform) {
     }
   });
 });
+
+

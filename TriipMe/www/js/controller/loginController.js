@@ -1,16 +1,15 @@
-TriipMeApp.controller('loginController',['$scope','$location','$ionicPopup',function($scope,$location,$ionicPopup){
+TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state',function($scope,$ionicPopup,$state){
 
     // VARIABLES INITIALIZATION
-    $scope.username = "";
-    $scope.password = "";
+    $scope.username = "nguyentrongtin2331@gmail.com";
+    $scope.password = "admin";
 
     $scope.login = function() {
         console.log($scope.username);
         console.log($scope.password);
         if($scope.username == "" || $scope.password == "")
             return;
-        var ref = new Firebase("https://triipme.firebaseio.com");
-        ref.authWithPassword({
+        fb.authWithPassword({
             email    : $scope.username,
             password : $scope.password
         }, function(error, authData) {
@@ -18,10 +17,17 @@ TriipMeApp.controller('loginController',['$scope','$location','$ionicPopup',func
                 console.log("Login Failed!", error);
                 $scope.showAlert();
             } else {
-                console.log("Authenticated successfully with payload:", authData);
-                console.log($location.path());
+                //console.log(authData.uid.substr(authData.uid.indexOf(":")+1,authData.length));
+                //console.log($location.path());
                 //$location.path('/home');
-                $scope.$apply(function() { $location.path("/home"); });
+
+                //if (!$scope.$$phase) {
+                //    $scope.$apply(function() { $location.path("/home"); });
+                //}
+                fb.child("database").child("users").child(fb.getAuth().uid).child("name").once("value", function(data) {
+                    NameOfUser = data.val();
+                });
+                $state.go("home");
             }
         });
     };
