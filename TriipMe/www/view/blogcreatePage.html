@@ -1,4 +1,4 @@
-<ion-view title="Create Blog">
+<ion-view title="Create new Blog">
     <ion-content>
 <div class="list">
 
@@ -12,8 +12,6 @@
         <span class="input-label">Blog short description </span>
         <input type="text" placeholder="Blog description" ng-model="newblog.desc">
     </label>
-
-    <br>
 
     <div class="row">
         <div class="col ">        
@@ -30,17 +28,18 @@
     </div>
 
 
+
     <ion-scroll direction="x" class="available-scroller">
-    <div class="photo" collection-repeat="photo in photos"
-       item-height="250" item-width="photo.width + 30">
-            <img ng-show="photo.imgURI !== undefined" ng-src="{{photo.imgURI}}" />
+    <div class="createBlog-list-photo" collection-repeat="photo in photos"
+       item-height="250" item-width="300">
+         <img ng-src="{{photo.src}}">
     </div>
     </ion-scroll>
 
 
 
     <button class="button button-block button-positive" ng-click="createBlog()">
-        Add blog
+        Create new Blog
     </button>
 </div>
     </ion-content>
