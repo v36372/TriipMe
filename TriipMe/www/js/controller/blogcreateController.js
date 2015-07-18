@@ -1,4 +1,7 @@
-TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera',function($scope,$cordovaCamera){
+TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state',function($scope,$cordovaCamera,$state){
+    if(fb.getAuth().uid == "")
+        $state.go("login");
+
 
     $scope.newblog = {};
     $scope.newblog.like = 0;

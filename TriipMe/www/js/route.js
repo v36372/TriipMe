@@ -30,6 +30,15 @@ TriipMeApp.config(function($stateProvider, $urlRouterProvider) {
             url: "/create",
             templateUrl: "view/blogcreatePage.html",
             controller: "blogcreateController"
-        });
+        })
+        .state("blogdetails", {
+            params: {
+                blogid:{}
+            },
+            url: "/edit",
+            templateUrl: "view/blogdetailsPage.html",
+            controller: "blogdetailsController",
+            data: {'blogid':'blogid'}
+    });
     $urlRouterProvider.otherwise('/');
 });

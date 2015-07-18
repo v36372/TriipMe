@@ -1,4 +1,7 @@
 TriipMeApp.controller('homeController',['$scope','$state','$timeout',function($scope,$state,$timeout){
+    if(fb.getAuth().uid == "")
+        $state.go("login");
+
     $scope.redir = function(){
         //if (!$scope.$$phase) {
         //    $scope.$apply(function() { $location.path("/create"); });
@@ -6,6 +9,13 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout',function($s
         //$location.path("/create");
 
         $state.go("create");
+    };
+
+    $scope.redirEdit = function(blogid){
+        //BlogID = fb.child("database").child("users").child(fb.getAuth().uid).child("blogs")
+        console.log($scope.blogs);
+        $state.go("blogdetails",{blogid:blogid});
+
     };
 
     $scope.blogs = [];
@@ -17,8 +27,9 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout',function($s
         //blog.title = snapshot.val()
         var blog = snapshot.val();
         blog.time = (new Date(blog.time)).toDateString();
+        blog.id = snapshot.key();
         $scope.blogs.push(blog);
-        console.log(snapshot.val());
+        console.log(blog);
         $timeout(function(){
             $scope.$apply()
         },0);
