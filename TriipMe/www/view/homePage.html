@@ -1,5 +1,9 @@
 <ion-view title="Home">
     <ion-content>
+        <button class="button button-block button-positive" ng-click="redir()">
+        Create new blog
+        </button>
+
         <div ng-repeat="item in blogs">
             <div class="list card">
                 <div class="item item-avatar">
@@ -35,8 +39,5 @@
                 </div>
             </div>
         </div>
-        <button class="button button-block button-positive" ng-click="redir()">
-            Create new blog
-        </button>
     </ion-content>
 </ion-view>

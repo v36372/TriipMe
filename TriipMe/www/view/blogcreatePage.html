@@ -1,18 +1,46 @@
 <ion-view title="Create Blog">
     <ion-content>
 <div class="list">
-    <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
+
+
     <label class="item item-input">
+        <span class="input-label">Blog title </span>
         <input type="text" placeholder="Blog title" ng-model="newblog.title">
     </label>
+
     <label class="item item-input">
+        <span class="input-label">Blog short description </span>
         <input type="text" placeholder="Blog description" ng-model="newblog.desc">
     </label>
+
+    <br>
+
+    <div class="row">
+        <div class="col ">        
+        <button class="button button-block ion-ios-camera" ng-click="takePicture()">
+            Camera
+        </button>
+        </div>
+        
+        <div class="col col-50">        
+        <button class="button button-block ion-images" ng-click="choosePicture()">
+            Gallery
+        </button>
+        </div>
+    </div>
+
+
+    <ion-scroll direction="x" class="available-scroller">
+    <div class="photo" collection-repeat="photo in photos"
+       item-height="250" item-width="photo.width + 30">
+            <img ng-show="photo.imgURI !== undefined" ng-src="{{photo.imgURI}}" />
+    </div>
+    </ion-scroll>
+
+
+
     <button class="button button-block button-positive" ng-click="createBlog()">
         Add blog
-    </button>
-    <button class="button button-block button-positive" ng-click="choosePicture()">
-        Choose image from gallery
     </button>
 </div>
     </ion-content>
