@@ -1,0 +1,5 @@
+platforms/*
+resources/*
+android.*
+ios.*
+.*

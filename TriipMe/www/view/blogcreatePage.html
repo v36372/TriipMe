@@ -1,0 +1,19 @@
+<ion-view title="Create Blog">
+    <ion-content>
+<div class="list">
+    <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
+    <label class="item item-input">
+        <input type="text" placeholder="Blog title" ng-model="newblog.title">
+    </label>
+    <label class="item item-input">
+        <input type="text" placeholder="Blog description" ng-model="newblog.desc">
+    </label>
+    <button class="button button-block button-positive" ng-click="createBlog()">
+        Add blog
+    </button>
+    <button class="button button-block button-positive" ng-click="choosePicture()">
+        Choose image from gallery
+    </button>
+</div>
+    </ion-content>
+</ion-view>
