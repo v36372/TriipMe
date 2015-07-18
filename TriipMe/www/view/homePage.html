@@ -4,6 +4,8 @@
         Create new blog
         </button>
 
+        <ion-spinner ng-show="connected == true" style="margin-left: 50%;" icon="lines" class="spinner-positive"></ion-spinner>
+
         <div ng-repeat="item in blogs">
             <div class="list card">
                 <div class="item item-avatar">

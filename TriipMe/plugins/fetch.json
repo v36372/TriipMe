@@ -46,5 +46,13 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "com.synconset.imagepicker": {
+        "source": {
+            "type": "local",
+            "path": "cordova-imagePicker"
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }
