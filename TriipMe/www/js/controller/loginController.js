@@ -1,10 +1,12 @@
-TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state',function($scope,$ionicPopup,$state){
+TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','userService',function($scope,$ionicPopup,$state,userService){
 
     // VARIABLES INITIALIZATION
     $scope.username = "nguyentrongtin2331@gmail.com";
     $scope.password = "admin";
 
     $scope.login = function() {
+        $scope.username = document.getElementById('userName').value;
+        $scope.password = document.getElementById('password').value;
         console.log($scope.username);
         console.log($scope.password);
         if($scope.username == "" || $scope.password == "")
@@ -26,6 +28,10 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state',functio
                 //}
                 fb.child("database").child("users").child(fb.getAuth().uid).child("name").once("value", function(data) {
                     NameOfUser = data.val();
+                    var user = {};
+                    user.Id = fb.getAuth().uid;
+                    user.Name = NameOfUser;
+                    userService.setUser(user);
                 });
                 //NameOfUser = fb.child("database").child("users").child(fb.getAuth().uid).child("name").val();
                 $state.go("home");

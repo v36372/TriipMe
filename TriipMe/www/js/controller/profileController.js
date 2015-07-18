@@ -1,10 +1,6 @@
-TriipMeApp.controller('profileController',['$scope',function($scope){
+TriipMeApp.controller('profileController',['$scope','$timeout','userService','blogsService',function($scope,$timeout,userService,blogsService){
 	var vm = this;
-	vm.post = {};
-	vm.post.text = "this is a post";
-	vm.post.created_at = "bangkok";
-	vm.doSt = doSt;		
-	function doSt(){
-		console.log('hello profile');
-	}
-}])
+	vm.user = userService.getUser();
+	vm.blogs = blogsService.getBlogs(vm.user.Id);
+	console.log(vm.blogs);		    		
+}]);
