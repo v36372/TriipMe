@@ -17,4 +17,8 @@ TriipMeApp.run(function($ionicPlatform) {
   });
 });
 
+TriipMeApp.controller('MainController', function(){
+  console.log("hello");
+});
+
 

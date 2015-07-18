@@ -27,6 +27,7 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state',functio
                 fb.child("database").child("users").child(fb.getAuth().uid).child("name").once("value", function(data) {
                     NameOfUser = data.val();
                 });
+                //NameOfUser = fb.child("database").child("users").child(fb.getAuth().uid).child("name").val();
                 $state.go("home");
             }
         });
@@ -38,7 +39,7 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state',functio
             template: 'Check your Email,Password and try again'
         });
         alertPopup.then(function(res) {
-            console.log('Thank you for not eating my delicious ice cream cone');
+            //console.log('Thank you for not eating my delicious ice cream cone');
         });
     };
 }]);
