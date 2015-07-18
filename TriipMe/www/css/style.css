@@ -1,5 +1,10 @@
 /* Empty. Add your own CSS if you like */
-.images{
-    -webkit-flex-wrap: wrap;
-    flex-wrap: wrap;
+.createBlog-list-photo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.available-scroller {
+  height: 250px;
 }
