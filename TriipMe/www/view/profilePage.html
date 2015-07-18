@@ -1,0 +1,24 @@
+<ion-view title="Profile">
+   <ion-content>
+      <div id="profile-bg"></div>
+      <div id="content">
+        <div id="profile-info">
+          <img id="profile-image" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/94311/me.png">
+          <h3 id="profile-name">Max</h3>
+          <span id="profile-description">Co-creator of <a href="http://twitter.com/ionicframework">@ionicframework</a>, founder of
+            <a href="http://twitter.com/driftyco">@driftyco</a></span>
+        </div>
+        <ion-list>
+          <ion-item ng-repeat="post in posts">
+            <img class="post-profile-image" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/94311/me.png">
+            {{post.text}}
+            <div class="post-time">{{post.created_at | relativets }}</div>
+            <div class="post-options">
+              <i class="icon-reply"></i>
+              <i class="icon-shuffle"></i>
+            </div>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-content>
+</ion-view>
