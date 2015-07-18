@@ -17,8 +17,13 @@ TriipMeApp.run(function($ionicPlatform) {
   });
 });
 
-TriipMeApp.controller('MainController', function(){
-  console.log("hello");
-});
+TriipMeApp.controller('MainController',['$scope',function($scope){
+
+    $scope.headerGoBack = function() {
+      $ionicHistory.goBack();
+    console.log("hello");
+  }
+
+}]);
 
 

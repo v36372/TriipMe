@@ -8,10 +8,20 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
     $scope.newblog.cmt = 0;
     $scope.newblog.time = (new Date()).getTime();
     $scope.newblog.author = NameOfUser;
+    $scope.photos=[];
+    $scope.photo={};
 
-        $scope.createBlog = function(){
-        var blogsRef = fb.child("database").child("users").child(fb.getAuth().uid).child("blogs");
-        blogsRef.push($scope.newblog);
+    for (var i = 0; i < 100; i++) {
+    $scope.photos.push({
+    width: 300,
+    height: 300,
+    src: 'http://placekitten.com/' + 299 + '/' + 300
+    });
+    };
+
+    $scope.createBlog = function(){
+    var blogsRef = fb.child("database").child("users").child(fb.getAuth().uid).child("blogs");
+    blogsRef.push($scope.newblog);
     };
 
     $scope.choosePicture = function(){
@@ -33,9 +43,11 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
             targetHeight: 300,
             popoverOptions: CameraPopoverOptions,
             saveToPhotoAlbum: true
+
         };
 
         $cordovaCamera.getPicture(options).then(function(imageData) {
+
             $scope.imgURI = "data:image/jpeg;base64," + imageData;
             $scope.newblog.img = imageData;
         }, function(err) {
@@ -44,3 +56,4 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
     }
 
 }]);
+
