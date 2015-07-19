@@ -105,6 +105,7 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
                 }
             );
             console.log(NameOfUser);
+
             blogsRef.child(blog.id).child("comments").child("cmts").push(
                 {
                     "author":NameOfUser,
