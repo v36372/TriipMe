@@ -3,6 +3,7 @@ TriipMeApp.controller('profileController',['$scope','$state','$timeout','userSer
 	$scope.blogs = blogsService.getBlogs($scope.user.Id);
 	$scope.redirEdit = redirEdit;
 	$scope.viewProfile = viewProfile;
+	$scope.createNewBlog = createNewBlog;
 	
 	function redirEdit(blogid){
         //BlogID = fb.child("database").child("users").child(fb.getAuth().uid).child("blogs")
@@ -13,4 +14,8 @@ TriipMeApp.controller('profileController',['$scope','$state','$timeout','userSer
 	function viewProfile(){
 		$state.go('profile');
 	}
+	
+	function createNewBlog(){      
+        $state.go("create");
+    };
 }]);

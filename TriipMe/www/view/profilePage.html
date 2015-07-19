@@ -7,6 +7,11 @@
           <h3 id="profile-name" clas ng-model="user.Name">{{user.Name}}</h3>
           <span id="profile-description">The Happiness Way To Enjoy Trully Local Expression</span>
         </div>
+        
+        <button class="button button-block button-calm" ng-click="createNewBlog()">
+        Create new blog
+        </button>
+        
         <div ng-repeat="item in blogs">
             <div class="list card">
                 <div class="item item-avatar avatar-custom">
