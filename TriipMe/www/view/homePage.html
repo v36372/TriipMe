@@ -23,21 +23,21 @@
                         {{item.desc}}
                     </p>
                     <p>
-                        <a class="subdued">{{item.like}} Like</a>
-                        <a class="subdued">{{item.cmt}} Comments</a>
+                        <a class="subdued">{{item.likes.num}} Like</a>
+                        <a class="subdued">{{item.comments.num}} Comments</a>
                     </p>
                 </div>
 
                 <div class="item tabs tabs-secondary tabs-icon-left">
-                    <a class="tab-item">
+                    <a class="tab-item" ng-click="likeBlog(item)">
                         <i class="icon ion-thumbsup"></i>
                         Like
                     </a>
-                    <a class="tab-item">
+                    <a class="tab-item" ng-click="commentBlog(item)">
                         <i class="icon ion-chatbox"></i>
                         Comment
                     </a>
-                    <a class="tab-item">
+                    <a class="tab-item" ng-click="shareBlog(item)">
                         <i class="icon ion-share"></i>
                         Share
                     </a>

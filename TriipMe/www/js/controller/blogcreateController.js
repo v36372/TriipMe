@@ -22,7 +22,7 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
     $scope.createBlog = function(){
         var blogsRef = fb.child("database").child("users").child(fb.getAuth().uid).child("blogs");
         blogsRef.push($scope.newblog);
-        //Camera.cleanup(null,null);
+        Camera.cleanup(null,null);
     };
 
     $scope.choosePicture = function(){

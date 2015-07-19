@@ -1,0 +1,25 @@
+<ion-modal-view>
+    <ion-header-bar>
+        <button class="button" ng-click="closeModal()">
+            <i class="icon ion-ios-arrow-left"></i>
+        </button>
+        <h1 class="title">Comments</h1>
+    </ion-header-bar>
+    <ion-content>
+        <div ng-repeat="cmt in cmts">
+            <div class="item item-avatar">
+                <img src="img/avatar.jpg">
+                <h2>{{cmt.author}}</h2>
+                <p>{{cmt.time}}</p>
+                <p>{{cmt.content}}</p>
+            </div>
+        </div>
+        <div class="item item-input-inset">
+            <textarea rows="4" placeholder="Comments" ng-model="scope.commentContent" style="resize:none;width:95%;padding:0 5%;margin-right:5%;">
+            </textarea>
+            <button class="button button-small" ng-click="sendComment(blog)">
+                <i class="icon ion-ios-paperplane"></i>
+            </button>
+        </div>
+    </ion-content>
+</ion-modal-view>
