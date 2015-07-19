@@ -1,6 +1,13 @@
+<style>
+	.popup-head {
+  background-color : skyblue;
+}
+
+.popup-buttons{color : skyblue;}
+</style>
 <ion-view title="Home">
     <ion-content>
-        <button class="button button-block button-positive" ng-click="redir()">
+        <button class="button button-block button-calm" ng-click="redir()">
         Create new blog
         </button>
 
@@ -8,9 +15,9 @@
 
         <div ng-repeat="item in blogs">
             <div class="list card">
-                <div class="item item-avatar">
-                    <img src="img/avatar.jpg">
-                    <h2>{{item.author}}</h2>
+                <div class="item item-avatar avatar-custom">
+                    <img src="img/avatar.jpg" ng-click="viewProfile()">
+                    <h2 ng-click="viewProfile()">{{item.author}}</h2>
                     <p>{{item.time}}</p>
                     <button class="button button-clear" style="position:absolute;right:15px;top:15px;" ng-click="redirEdit(item.id)">
                         <i class="icon ion-chevron-right"></i>
@@ -44,5 +51,37 @@
                 </div>
             </div>
         </div>
-    </ion-content>
+    
+	<div class="tabs-striped tabs-color-calm">
+    <div class="tabs">
+      <a class="tab-item active" href="#">
+        <i class="icon ion-home"></i>
+        Home
+      </a>
+	  <a class="tab-item " href="#">
+        <i class="icon ion-android-person"></i>
+        Profile
+      </a>
+      <a class="tab-item" href="#">
+        <i class="icon ion-android-notifications-none"></i>
+        Favorites
+      </a>
+      <a class="tab-item" ng-click="openPopover($event)">
+        <i class="icon ion-gear-a"></i>
+        Settings
+      </a>
+	  <script id="my-popover.html" type="text/ng-template">
+		  <ion-popover-view style="height:100px;width:100px; border-radius:20%; background:whitesmoke">		
+			<ion-content>
+				<a class="tab-item" ng-click="showConfirm($event)">
+					<i class="icon ion-log-out"></i>Log out					
+				</a>
+			</ion-content>
+		  </ion-popover-view>
+</script>
+	  
+    </div>
+  </div>
+	
+	</ion-content>
 </ion-view>
