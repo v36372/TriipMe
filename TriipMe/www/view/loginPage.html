@@ -1,16 +1,27 @@
-<ion-view title="TriipMe Login">
+<ion-view title="TriipMe Login" class="login-background">
   <ion-content>
-<div class="list">
-  <label class="item item-input">
-    <input id="userName" type="text" placeholder="Email" ng-model="username">
-  </label>
-  <label class="item item-input">
-    <input id="password" type="password" placeholder="Password" ng-model="password">
-  </label>
-  <button class="button button-block button-positive" ng-click="login()">
-    Login
-  </button>
-  <!--<ion-spinner ng-hide="connected == false" style="margin-left: 50%;" icon="lines" class="spinner-positive"></ion-spinner>-->
-</div>
+    <div>
+      <div align="middle">
+        <img src="../img/logo.jpg" class="logo">
+      </div>
+      <div class="transbox">
+        <div class="input">
+          <label class="item item-input item-input-login">
+            <input type="text" placeholder="Email" ng-model="username">
+          </label>
+          <label class="item item-input item-input-login">
+            <input type="password" placeholder="Password" ng-model="password">
+          </label>
+        </div>
+        <div class="row">
+          <div class="col ">
+            <button class="button button-block button-positive" id="button-login" ng-click="login()">Login</button>
+          </div>
+          <div class="col col-50">
+            <button class="button button-block button-balanced" id="button-login" ng-click="signUp()">Sign Up</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </ion-content>
 </ion-view>

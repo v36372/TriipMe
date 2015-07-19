@@ -63,3 +63,49 @@
     margin: 30px auto 0;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.7);
 }
+
+.input{
+  padding: 20px;
+}
+.logo{
+  display: block;
+  height: 150px;
+  width: 150px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  max-width:100%;
+  max-height:100%;
+}
+
+.login-background{
+  background: url(../img/background.jpg) no-repeat center center fixed;
+   -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  opacity: 0.6;
+  filter: alpha(opacity=40);
+}
+
+div.transbox {
+    position: relative;
+    margin: 0 auto;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #ffffff;
+    border: 2px solid grey;
+    border-radius: 20px;
+    opacity: 0.9;
+}
+.button-block{
+  border-radius: 50px;
+}
+
+.button-login{
+  width: 50%;
+}
+
+
+.popup-container .popup{
+  width: 420px!important;
+}
