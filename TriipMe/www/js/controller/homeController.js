@@ -61,15 +61,18 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
         console.log(blog.id);
         blogsRef.child(blog.id).child("likes").child(fb.getAuth().uid).once("value",function(data){
             console.log("no");
-            if(data == null){
+            if(data.val() == null){
                 console.log("yes");
-                ++blog.like;
+                ++blog.likes.num;
                 blogsRef.child(blog.id).child("likes").update(
                     {
-                        "num":blog.like,
-                        "fb.getAuth().uid" : true
+                        "num":blog.likes.num
                     }
                 );
+                var obj = {};
+                obj[fb.getAuth().uid] = true;
+
+                blogsRef.child(blog.id).child("likes").update(obj);
             }
         });
     };

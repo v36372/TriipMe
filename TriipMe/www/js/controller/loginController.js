@@ -6,7 +6,7 @@ TriipMeApp.controller('loginController', ['$scope', '$ionicPopup', '$state','$ti
 
     $scope.show = function() {
         $ionicLoading.show({
-            template: '<ion-spinner icon="crescent" class="spinner-positive"></ion-spinner>'
+            template: '<ion-spinner icon="lines" class="spinner-positive"></ion-spinner>'
         });
     };
     $scope.hide = function(){
