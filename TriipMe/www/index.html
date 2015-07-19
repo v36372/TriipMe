@@ -56,6 +56,36 @@
         <ion-nav-view>
         </ion-nav-view>
 
+      <div class="tabs-striped tabs-color-calm">
+        <div class="tabs">
+          <a class="tab-item active" href="#home">
+            <i class="icon ion-home"></i>
+            Home
+          </a>
+          <a class="tab-item " href="#profile">
+            <i class="icon ion-android-person"></i>
+            Profile
+          </a>
+          <a class="tab-item" href="#">
+            <i class="icon ion-android-notifications-none"></i>
+            Favorites
+          </a>
+          <a class="tab-item" ng-click="openPopover($event)">
+            <i class="icon ion-gear-a"></i>
+            Settings
+          </a>
+          <script id="my-popover.html" type="text/ng-template">
+            <ion-popover-view style="height:100px;width:100px; border-radius:20%; background:whitesmoke">
+              <ion-content>
+                <a class="tab-item" ng-click="showConfirm($event)">
+                  <i class="icon ion-log-out"></i>Log out
+                </a>
+              </ion-content>
+            </ion-popover-view>
+          </script>
+
+        </div>
+      </div>
     </ion-pane>
   </body>
 </html>

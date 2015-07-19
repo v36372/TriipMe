@@ -25,7 +25,8 @@
                 </div>
 
                 <div class="item item-body">
-                    <img class="full-image" data-ng-src="data:image/png;base64,{{item.img}}">
+                    <!--<img class="full-image" data-ng-src="data:image/png;base64,{{item.img}}">-->
+                    <img class="full-image" src="img/hong-kong.jpg">
                     <p>
                         {{item.desc}}
                     </p>
@@ -51,37 +52,6 @@
                 </div>
             </div>
         </div>
-    
-	<div class="tabs-striped tabs-color-calm">
-    <div class="tabs">
-      <a class="tab-item active" href="#">
-        <i class="icon ion-home"></i>
-        Home
-      </a>
-	  <a class="tab-item " href="#">
-        <i class="icon ion-android-person"></i>
-        Profile
-      </a>
-      <a class="tab-item" href="#">
-        <i class="icon ion-android-notifications-none"></i>
-        Favorites
-      </a>
-      <a class="tab-item" ng-click="openPopover($event)">
-        <i class="icon ion-gear-a"></i>
-        Settings
-      </a>
-	  <script id="my-popover.html" type="text/ng-template">
-		  <ion-popover-view style="height:100px;width:100px; border-radius:20%; background:whitesmoke">		
-			<ion-content>
-				<a class="tab-item" ng-click="showConfirm($event)">
-					<i class="icon ion-log-out"></i>Log out					
-				</a>
-			</ion-content>
-		  </ion-popover-view>
-</script>
-	  
-    </div>
-  </div>
 	
 	</ion-content>
 </ion-view>

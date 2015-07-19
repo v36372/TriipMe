@@ -1,4 +1,4 @@
-TriipMeApp.controller('loginController', ['$scope', '$ionicPopup', '$state', function ($scope, $ionicPopup, $state) {
+TriipMeApp.controller('loginController', ['$scope', '$ionicPopup', '$state','$timeout', function ($scope, $ionicPopup, $state,$timeout) {
 
     // VARIABLES INITIALIZATION
     $scope.username = "nguyentrongtin2331@gmail.com";
@@ -44,20 +44,28 @@ TriipMeApp.controller('loginController', ['$scope', '$ionicPopup', '$state', fun
     };
 
     $scope.signUp = function () {
-        $scope.data = {}
+        //$scope.data = {}
+        //
+        //// An elaborate, custom popup
+        //var myPopup = $ionicPopup.show({
+        //    templateUrl: '../../view/signUp.html',
+        //    title:'Sign up',
+        //    subTitle: 'Create a new account'
+        //});
+        //myPopup.then(function (res) {
+        //    console.log('Tapped!', res);
+        //});
+        //
+        //$scope.myPopup = myPopup;
+        //console.log("open");
+        //$timeout(function () {
+        //    myPopup.close(); //close the popup after 3 seconds for some reason
+        //}, 3000);
+    };
 
-        // An elaborate, custom popup
-        var myPopup = $ionicPopup.show({
-            templateUrl: '../../view/signUp.html',
-            title:'Sign up',
-            subTitle: 'Create a new account'
-        });
-        myPopup.then(function (res) {
-            console.log('Tapped!', res);
-        });
-        $timeout(function () {
-            myPopup.close(); //close the popup after 3 seconds for some reason
-        }, 3000);
+    $scope.cancel = function(){
+        console.log("cclose");
+        $scope.myPopup.close();
     };
 
 }]);

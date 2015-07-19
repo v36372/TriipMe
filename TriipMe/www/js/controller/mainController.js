@@ -3,4 +3,7 @@ TriipMeApp.controller('MainController', ['$scope', function ($scope) {
     $ionicHistory.goBack();
     console.log("hello");
   }
+
+  $scope.isLoggedIn = false;
+  console.log(fb.getAuth().uid);
 }]);

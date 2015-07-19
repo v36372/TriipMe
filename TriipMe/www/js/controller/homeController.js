@@ -1,4 +1,4 @@
-TriipMeApp.controller('homeController',['$scope','$state','$timeout','userService','$ionicPopover','$ionicPopup',function($scope,$state,$timeout,userServic,$ionicPopover,$ionicPopup){
+TriipMeApp.controller('homeController',['$scope','$state','$timeout','userService','$ionicPopover','$ionicPopup','$ionicModal',function($scope,$state,$timeout,userServic,$ionicPopover,$ionicPopup,$ionicModal){
 
 	// .fromTemplate() method
   var template = '<ion-popover-view><ion-header-bar> <h1 class="title">Title</h1> </ion-header-bar> <ion-content>Hello</ion-content></ion-popover-view>';
@@ -139,6 +139,7 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
                     "num":blog.comments.num
                 }
             );
+            console.log(NameOfUser);
             blogsRef.child(blog.id).child("comments").child("cmts").push(
                 {
                     "author":NameOfUser,
