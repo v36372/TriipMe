@@ -1,4 +1,4 @@
-TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$ionicLoading','userService',function($scope,$ionicPopup,$state,$ionicLoading,userService){
+TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$ionicLoading',function($scope,$ionicPopup,$state,$ionicLoading){
 
     // VARIABLES INITIALIZATION
     $scope.username = "nguyentrongtin2331@gmail.com";
@@ -40,10 +40,6 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$ionic
                 //}
                 fb.child("database").child("users").child(fb.getAuth().uid).child("name").once("value", function(data) {
                     NameOfUser = data.val();
-                    var user = {};
-                    user.Id = fb.getAuth().uid;
-                    user.Name = NameOfUser;
-                    userService.setUser(user);
                 });
                 //NameOfUser = fb.child("database").child("users").child(fb.getAuth().uid).child("name").val();
                 $state.go("home");
