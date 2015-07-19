@@ -59,10 +59,20 @@
         <i class="icon ion-android-notifications-none"></i>
         Favorites
       </a>
-      <a class="tab-item" href="#">
+      <a class="tab-item" ng-click="openPopover($event)">
         <i class="icon ion-gear-a"></i>
         Settings
       </a>
+	  <script id="my-popover.html" type="text/ng-template">
+		  <ion-popover-view style="height:100px;width:100px	">		
+			<ion-content>
+				<a class="tab-item" ng-click="showConfirm($event)">
+					<i class="icon ion-log-out"></i>Log out					
+				</a>
+			</ion-content>
+		  </ion-popover-view>
+</script>
+	  
     </div>
   </div>
 	
