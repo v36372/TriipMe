@@ -1,4 +1,4 @@
-/*!
+﻿/*!
  * Copyright 2014 Drifty Co.
  * http://drifty.com/
  *
@@ -4515,7 +4515,7 @@ ion-tabs.tabs-color-active-dark .tab-item {
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both; }
   .popup-container .popup {
-    width: 250px;
+    width: 420px;
     max-width: 100%;
     max-height: 90%;
     border-radius: 0px;
