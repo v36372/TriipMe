@@ -9,54 +9,43 @@
   height: 250px;
 }
 
-.myDiv{
-  overflow-y: hidden; // hide vertical
-  overflow-x: hidden; // hide horizontal
+.input{
+  padding: 20px;
 }
 .logo{
-  margin-top: 100px;
-  margin-bottom: 60px;
+  display: block;
+  height: 150px;
+  width: 150px;
+  margin-top: 40px;
+  margin-bottom: 40px;
   max-width:100%;
   max-height:100%;
 }
 
 .login-background{
-  background-image: url(../img/background.jpg);
-  max-width:100%;
-  max-height:100%;
-  display: inline-block;
+  background: url(../img/background.jpg) no-repeat center center fixed;
+   -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   opacity: 0.6;
   filter: alpha(opacity=40);
-
 }
 
 div.transbox {
+    position: relative;
     margin: 0 auto;
-    margin-top: 150px;
+    margin-left: 10px;
+    margin-right: 10px;
     background-color: #ffffff;
     border: 2px solid grey;
     border-radius: 20px;
     opacity: 0.9;
-    filter: alpha(opacity=60);
-    width: 445px;
-}
-
-.item-input{
-  width:400px;
-  background-color: white;
-}
-
-.item-input-login{
-  margin-top: 15px;
-  margin-left: 20px;
-  margin-right:20px;
-
 }
 .button-block{
   border-radius: 50px;
 }
 
-#button-login{
-  margin-left: 70px;
-  margin-right:20px;
+.button-login{
+  width: 50%;
 }
