@@ -150,3 +150,8 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
         // Execute action
     });
 }]);
+
+
+TriipMeApp.controller('ModalInstanceCtrl', function ($scope) {
+    console.log("yes");
+});

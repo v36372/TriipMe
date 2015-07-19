@@ -43,7 +43,7 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
   };
 
   $scope.isLoggedIn = false;
-  console.log(fb.getAuth().uid);
-  console.log($state);
+  //console.log(fb.getAuth().uid);
+  //console.log($state);
   //$scope.url = $state.url();
 }]);
