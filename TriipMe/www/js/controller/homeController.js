@@ -78,6 +78,7 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
         console.log(blog.comments.cmts);
         $scope.blog = blog;
         $scope.commentContent = "";
+        $scope.cmts = [];
 
         //$scope.cmts.push(blog.comments.cmts);
         //blog.comments.cmts.forEach(function(cmt){
