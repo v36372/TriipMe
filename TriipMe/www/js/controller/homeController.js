@@ -124,7 +124,7 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
 
     $ionicModal.fromTemplateUrl('view/template/commentModalTemplate.html', {
         scope: $scope,
-        commentContent:$scope.commentContent,
+        controller:'ModalInstanceCtrl',
         animation: 'slide-in-up'
     }).then(function(modal,commentContent) {
         $scope.modal = modal;
