@@ -8,6 +8,15 @@
 .available-scroller {
     height: 250px;
 }
+
+.avatar-custom > img:hover{
+    cursor: pointer;
+}
+
+.avatar-custom > h2:hover{
+    cursor: pointer;
+}
+
 #profile-bg {
     position: fixed;
     left: 0;
