@@ -14,6 +14,8 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$ionic
     };
 
     $scope.login = function() {
+        $scope.username = document.getElementById('userName').value;
+        $scope.password = document.getElementById('password').value;
         $scope.connected = true;
         $scope.show();
         console.log($scope.username);

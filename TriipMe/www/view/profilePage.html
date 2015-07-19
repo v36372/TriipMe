@@ -1,11 +1,12 @@
-<ion-view title="Home">
-    <ion-content>
-        <button class="button button-block button-calm" ng-click="redir()">
-        Create new blog
-        </button>
-
-        <ion-spinner ng-show="connected == true" style="margin-left: 50%;" icon="lines" class="spinner-positive"></ion-spinner>
-
+<ion-view title="Profile">
+   <ion-content>
+      <div id="profile-bg"></div>
+      <div id="content">
+        <div id="profile-info">
+          <img id="profile-image" class="avatar-custom" src="../img/avatar.jpg">
+          <h3 id="profile-name" clas ng-model="user.Name">{{user.Name}}</h3>
+          <span id="profile-description">The Happiness Way To Enjoy Trully Local Expression</span>
+        </div>
         <div ng-repeat="item in blogs">
             <div class="list card">
                 <div class="item item-avatar avatar-custom">
@@ -44,27 +45,6 @@
                 </div>
             </div>
         </div>
-    
-	<div class="tabs-striped tabs-color-calm">
-    <div class="tabs">
-      <a class="tab-item active" href="#">
-        <i class="icon ion-home"></i>
-        Home
-      </a>
-	  <a class="tab-item " href="#">
-        <i class="icon ion-android-person"></i>
-        Profile
-      </a>
-      <a class="tab-item" href="#">
-        <i class="icon ion-android-notifications-none"></i>
-        Favorites
-      </a>
-      <a class="tab-item" href="#">
-        <i class="icon ion-gear-a"></i>
-        Settings
-      </a>
-    </div>
-  </div>
-	
-	</ion-content>
+      </div>
+    </ion-content>
 </ion-view>
