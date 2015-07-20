@@ -106,32 +106,32 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
         $scope.openModal();
     };
 
-    $scope.sendComment = function(blog,commentContent){
-        console.log(blog);
-        console.log(commentContent);
-        console.log($scope.commentContent);
-
-        blogsRef.child(blog.id).child("comments").child("cmts").once("value",function(data){
-            ++blog.comments.num;
-            blogsRef.child(blog.id).child("comments").update(
-                {
-                    "num":blog.comments.num
-                }
-            );
-            console.log(NameOfUser);
-
-            blogsRef.child(blog.id).child("comments").child("cmts").push(
-                {
-                    "author":fb.getAuth().uid,
-		    "authorname":NameOfUser,
-                    "content":commentContent
-                }
-            );
-        });
-
-        commentContent = "";
-        //$scope.Init();
-    };
+    //$scope.sendComment = function(blog,commentContent){
+    //    console.log(blog);
+    //    console.log(commentContent);
+    //    console.log($scope.commentContent);
+    //
+    //    blogsRef.child(blog.id).child("comments").child("cmts").once("value",function(data){
+    //        ++blog.comments.num;
+    //        blogsRef.child(blog.id).child("comments").update(
+    //            {
+    //                "num":blog.comments.num
+    //            }
+    //        );
+    //        console.log(NameOfUser);
+    //
+    //        blogsRef.child(blog.id).child("comments").child("cmts").push(
+    //            {
+    //                "author":fb.getAuth().uid,
+		//    "authorname":NameOfUser,
+    //                "content":commentContent
+    //            }
+    //        );
+    //    });
+    //
+    //    commentContent = "";
+    //    //$scope.Init();
+    //};
 
     $scope.shareBlog = function(){
 
@@ -141,9 +141,9 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
         scope: $scope,
         controller:'ModalInstanceCtrl',
         animation: 'slide-in-up'
-    }).then(function(modal,commentContent) {
+    }).then(function(modal) {
         $scope.modal = modal;
-        $scope.commentContent = commentContent;
+        //$scope.commentContent = commentContent;
     });
 
     $scope.openModal = function() {
@@ -168,5 +168,35 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
 
 
 TriipMeApp.controller('ModalInstanceCtrl', function ($scope) {
+    $scope.cmt = {};
+    $scope.cmt.content = "";
     console.log("yes");
+
+    $scope.sendComment = function(blog){
+        console.log(blog);
+        //console.log(commentContent);
+        console.log($scope.cmt.content);
+
+        var blogsRef = fb.child("database").child("blogs");
+        blogsRef.child(blog.id).child("comments").child("cmts").once("value",function(data){
+            ++blog.comments.num;
+            blogsRef.child(blog.id).child("comments").update(
+                {
+                    "num":blog.comments.num
+                }
+            );
+            console.log(NameOfUser);
+
+            blogsRef.child(blog.id).child("comments").child("cmts").push(
+                {
+                    "author":fb.getAuth().uid,
+                    "authorname":NameOfUser,
+                    "content":$scope.cmt.content
+                }
+            );
+        });
+
+        $scope.cmt.content = "";
+        //$scope.Init();
+    };
 });

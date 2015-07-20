@@ -18,6 +18,7 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$timeo
             email: $scope.logInfo.username,
             password: $scope.logInfo.password
         }, function (error, authData) {
+            $scope.hide();
             if (error) {
                 console.log("Login Failed!", error);
                 $scope.showAlert();
