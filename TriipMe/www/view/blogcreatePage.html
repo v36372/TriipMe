@@ -13,6 +13,14 @@
         <input type="text" placeholder="Blog description" ng-model="newblog.desc">
     </label>
 
+    <label class="item item-input item-select">
+    <div class="input-label">
+    Event
+    </div>
+    <select>
+    <option ng-repeat="trip in trips">{{trip.name}}</option>
+    </select>
+    </label>
     <div class="row">
         <div class="col ">        
         <button class="button button-block ion-ios-camera" ng-click="takePicture()">
@@ -26,18 +34,12 @@
         </button>
         </div>
     </div>
-
-
-
     <ion-scroll direction="x" class="available-scroller">
     <div class="createBlog-list-photo" collection-repeat="photo in photos"
        item-height="250" item-width="300">
          <img ng-src="{{photo}}"/>
     </div>
     </ion-scroll>
-
-
-
     <button class="button button-block button-positive" ng-click="createBlog()">
         Create new Blog
     </button>
