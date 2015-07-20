@@ -18,6 +18,11 @@ TriipMeApp.controller('signupController', ['$scope',function ($scope) {
                 console.log("Error creating user:", error);
             } else {
                 console.log("Successfully created user account with uid:", userData.uid);
+                var newUser = {};
+                console.log(userData.uid);
+                newUser[userData.uid] = {};
+                newUser[userData.uid].name = "Nguyen Trong Tin"; //  CHANGE WITH ACTUAL DATA
+                fb.child("database").child("users").update(newUser);
             }
         });
     };
