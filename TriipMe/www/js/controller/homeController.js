@@ -9,6 +9,9 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
     $scope.commentContent = "";
     $scope.connected = true;
     $scope.cmts = [];
+    $scope.NameOfUser = NameOfUser;
+
+
 
     $scope.redir = function(){
         //if (!$scope.$$phase) {
@@ -35,7 +38,7 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
     $scope.userName = fb.child("database").child("users").child(fb.getAuth().uid).child("name");
 
     console.log(fb.getAuth().uid);
-    var blogsRef = fb.child("database").child("users").child(fb.getAuth().uid).child("blogs");
+    var blogsRef = fb.child("database").child("blogs");
 
     $scope.Init = function()
     {
@@ -78,21 +81,27 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
         });
     };
 
+    $scope.loaded = false;
+
+    $scope.cmts = [];
+
     $scope.commentBlog = function(blog){
-        console.log(blog.comments.cmts);
+        //console.log(blog.comments.cmts);
         $scope.blog = blog;
         $scope.commentContent = "";
-        $scope.cmts = [];
+
 
         //$scope.cmts.push(blog.comments.cmts);
         //blog.comments.cmts.forEach(function(cmt){
         //    $scope.cmts.push(cmt);
         //});
         //console.log($scope.cmts);
-        blogsRef.child(blog.id).child("comments").child("cmts").on("child_added", function(snapshot) {
+        if(!$scope.loaded){
+            blogsRef.child(blog.id).child("comments").child("cmts").on("child_added", function(snapshot) {
                 $scope.cmts.push(snapshot.val());
-        });
-
+            });
+            $scope.loaded = true;
+        }
         $scope.commentContent = "";
         $scope.openModal();
     };

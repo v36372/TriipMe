@@ -18,7 +18,6 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$timeo
             email: $scope.logInfo.username,
             password: $scope.logInfo.password
         }, function (error, authData) {
-            $scope.hide();
             if (error) {
                 console.log("Login Failed!", error);
                 $scope.showAlert();
@@ -32,9 +31,10 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$timeo
                 //}
                 fb.child("database").child("users").child(fb.getAuth().uid).child("name").once("value", function (data) {
                     NameOfUser = data.val();
+                    $scope.hide();
+                    $state.go("home");
                 });
                 //NameOfUser = fb.child("database").child("users").child(fb.getAuth().uid).child("name").val();
-                $state.go("home");
             }
         });
     };

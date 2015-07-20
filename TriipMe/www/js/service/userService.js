@@ -11,11 +11,14 @@ TriipMeApp.service('userService',function(){
 	}
 	vm.currentUser = {};		
 	vm.getCurrentUser = getCurrentUser;
-	vm.setCurrentUser = setCurrentUser;		
+	vm.setCurrentUser = setCurrentUser;
+
 	function getCurrentUser(){
 		return vm.currentUser;		
-	}	
+	}
 	function setCurrentUser(user){
 		vm.currentUser = user;
-	}		
+	}
+
+
 })
