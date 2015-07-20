@@ -7,7 +7,7 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
     // VARIABLES
     $scope.blog = {};
     $scope.commentContent = "";
-    $scope.connected = true;
+    //$scope.connected = true;
     $scope.cmts = [];
     $scope.NameOfUser = NameOfUser;
 
@@ -29,8 +29,9 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
 
     };
     
-    $scope.viewProfile = function(){
-        $state.go('profile');
+    $scope.viewProfile = function(userid){
+        console.log(userid);
+        $state.go('profile',{userid:userid});
     }
 
     console.log($state.current);
@@ -45,15 +46,20 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
         blogsRef.orderByChild("time").limitToLast(5).on("child_added", function (snapshot) {
             //var blog = {};
             //blog.title = snapshot.val()
-            $scope.connected = false;
+            //$scope.connected = false;
             var blog = snapshot.val();
             blog.time = (new Date(blog.time)).toDateString();
             blog.id = snapshot.key();
-            $scope.blogs.push(blog);
-            console.log(blog);
-            $timeout(function () {
-                $scope.$apply()
-            }, 0);
+            fb.child("database").child("users").child(blog.author).once('value',function(data){
+                blog.authorname = data.child("name").val();
+                console.log(blog);
+                $timeout(function () {
+                    $scope.$apply();
+                    console.log("45454");
+                    $scope.blogs.push(blog);
+                }, 100);
+            });
+
         });
     };
 

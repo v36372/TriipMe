@@ -45,6 +45,11 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
     });
   };
 
+  $scope.viewProfile = function(){
+    console.log(fb.getAuth().uid);
+    $state.go('profile',{userid:fb.getAuth().uid});
+  };
+
   $scope.isLoggedIn = false;
   //console.log(fb.getAuth().uid);
   //console.log($state);

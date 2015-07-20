@@ -11,13 +11,13 @@
         Create new blog
         </button>
 
-        <ion-spinner ng-show="connected == true" style="margin-left: 50%;" icon="lines" class="spinner-positive"></ion-spinner>
+        <!--<ion-spinner ng-show="connected == true" style="margin-left: 50%;" icon="lines" class="spinner-positive"></ion-spinner>-->
 
         <div ng-repeat="item in blogs">
             <div class="list card">
                 <div class="item item-avatar avatar-custom">
-                    <img src="img/avatar.jpg" ng-click="viewProfile()">
-                    <h2 ng-click="viewProfile()">{{NameOfUser}}</h2>
+                    <img src="img/avatar.jpg" ng-click="viewProfile(item.author)">
+                    <h2 ng-click="viewProfile(item.author)">{{item.authorname}}</h2>
                     <p>{{item.time}}</p>
                     <button class="button button-clear" style="position:absolute;right:15px;top:15px;" ng-click="redirEdit(item.id)">
                         <i class="icon ion-chevron-right"></i>
