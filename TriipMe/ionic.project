@@ -1,4 +1,11 @@
 {
   "name": "TriipMe",
-  "app_id": "210f9425"
+  "app_id": "210f9425",
+  "browsers": [
+    {
+      "platform": "android",
+      "browser": "crosswalk",
+      "version": "12.41.296.5"
+    }
+  ]
 }
