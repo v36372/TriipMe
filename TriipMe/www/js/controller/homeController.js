@@ -88,7 +88,7 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
     $scope.commentBlog = function(blog){
         //console.log(blog.comments.cmts);
         $scope.blog = blog;
-        $scope.commentContent = "";
+        //$scope.commentContent = "";
 
 
         //$scope.cmts.push(blog.comments.cmts);
@@ -96,13 +96,14 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
         //    $scope.cmts.push(cmt);
         //});
         //console.log($scope.cmts);
+        $scope.cmts = [];
         if(!$scope.loaded){
             blogsRef.child(blog.id).child("comments").child("cmts").on("child_added", function(snapshot) {
                 $scope.cmts.push(snapshot.val());
             });
             $scope.loaded = true;
         }
-        $scope.commentContent = "";
+        //$scope.commentContent = "";
         $scope.openModal();
     };
 
@@ -150,6 +151,9 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
         $scope.modal.show();
     };
     $scope.closeModal = function() {
+        $scope.loaded = false;
+        blogsRef.child($scope.blog.id).child("comments").child("cmts").off("child_added");
+        //ref.off("value");
         $scope.modal.hide();
     };
     //Cleanup the modal when we're done with it!
