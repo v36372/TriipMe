@@ -1,5 +1,9 @@
 TriipMeApp.controller('profileController',['$scope','$state','$timeout','userService','blogsService','$stateParams',function($scope,$state,$timeout,userService,blogsService,$stateParams){
+	if(fb.getAuth().uid == "")
+		$state.go("login");
 
+
+	$scope.show();
 	var userid;
 	console.log($stateParams);
 	//if($stateParams.userid === 0)
@@ -15,6 +19,7 @@ TriipMeApp.controller('profileController',['$scope','$state','$timeout','userSer
 	fb.child("database").child("users").child(userid).child("name").once("value", function(data) {
 		$scope.user.Name = data.val();
 		$scope.blogs = blogsService.getBlogs($scope.user.Id);
+		$scope.hide();
 	});
 	//$scope.user = userService.getUser(userid);
 	//$scope.blogs = blogsService.getBlogs($scope.user.Id);

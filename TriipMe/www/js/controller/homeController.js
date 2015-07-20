@@ -4,6 +4,7 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
 	if(fb.getAuth().uid == "")
         $state.go("login");
 
+    $scope.show();
     // VARIABLES
     $scope.blog = {};
     $scope.commentContent = "";
@@ -55,9 +56,10 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
                 console.log(blog);
                 $timeout(function () {
                     $scope.$apply();
-                    console.log("45454");
+                    //console.log("45454");
                     $scope.blogs.push(blog);
-                }, 100);
+                    $scope.hide();
+                }, 10);
             });
 
         });

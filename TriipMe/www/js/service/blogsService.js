@@ -4,7 +4,7 @@ TriipMeApp.service('blogsService',function(){
 	function getBlogs(userId){
 		var blogsRef = fb.child("database").child("blogs");
 		var blogs = [];
-		blogsRef.orderByChild("author").equalTo(fb.getAuth().uid).limitToLast(5).on("child_added", function(snapshot) {
+		blogsRef.orderByChild("author").equalTo(userId).limitToLast(5).on("child_added", function(snapshot) {
             var blog = snapshot.val();
             blog.time = (new Date(blog.time)).toDateString();
             blog.id = snapshot.key();
