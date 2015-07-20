@@ -122,7 +122,8 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
 
             blogsRef.child(blog.id).child("comments").child("cmts").push(
                 {
-                    "author":NameOfUser,
+                    "author":fb.getAuth().uid,
+		    "authorname":NameOfUser,
                     "content":commentContent
                 }
             );

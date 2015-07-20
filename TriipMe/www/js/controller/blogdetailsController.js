@@ -3,10 +3,11 @@ TriipMeApp.controller('blogdetailsController',['$scope','$cordovaCamera','$state
         $state.go("login");
 
     $scope.blogid = $stateParams.blogid;
+    console.log($scope.blogid);
     $scope.blog = {};
     if($scope.blogid.length > 0)
     {
-        fb.child("database").child("users").child(fb.getAuth().uid).child("blogs").child($scope.blogid).once("value", function(data) {
+        fb.child("database").child("blogs").child($scope.blogid).once("value", function(data) {
             $scope.blog = data.val();
         });
     }

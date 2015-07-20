@@ -1,4 +1,4 @@
-TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state','$timeout',function($scope,$cordovaCamera,$state,$timeout){
+TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state',function($scope,$cordovaCamera,$state){
     if(fb.getAuth().uid == "")
         $state.go("login");
 
