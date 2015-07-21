@@ -149,3 +149,16 @@ div.transbox {
 #myTab{
   display: none;
 }
+
+.triipme-background{
+  background-color: #4FBBBC !important;
+  border-color: #fff !important; 
+}
+
+.triipme-color {
+    color: #4FBBBC !important;
+} 
+
+.triipme-color > a{
+    color: #4FBBBC !important;
+}
