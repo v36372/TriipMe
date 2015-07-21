@@ -16,7 +16,7 @@
         <div ng-repeat="item in blogs">
             <div class="list card">
                 <div class="item item-avatar avatar-custom">
-                    <img ng-src='{{item.authoravatar}}' ng-click="viewProfile(item.author)">
+                    <img ng-src={{item.authoravatar}} ng-click="viewProfile(item.author)">
                     <h2 ng-click="viewProfile(item.author)">{{item.authorname}}</h2>
                     <p>{{item.time}}</p>
                     <button class="button button-clear" style="position:absolute;right:15px;top:15px;" ng-click="redirEdit(item.id)">
