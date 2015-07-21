@@ -33,6 +33,7 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$timeo
                     AvatarOfUser = data.child("avatar").val();
                     //$scope.hide();
                     $('#myTab').css('display','block');
+                    $scope.activateHomeTab();
                     $state.go("home");
                 });
                 //NameOfUser = fb.child("database").child("users").child(fb.getAuth().uid).child("name").val();
@@ -85,10 +86,17 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$timeo
                 NameOfUser = fb.getAuth().facebook.displayName;
                 AvatarOfUser = fb.getAuth().facebook.profileImageURL;
                 $('#myTab').css('display','block');
+                $scope.activateHomeTab();
                 $state.go("home");
                 //NameOfUser = fb.child("database").child("users").child(fb.getAuth().uid).child("name").val();
             }
         });
     }
-
+    
+    $scope.activateHomeTab = function(){
+        $('#homeTab').addClass('active');
+        $('#profileTab').removeClass('active');
+        $('#favoriteTab').removeClass('active');
+        $('#settingTab').removeClass('active');
+    }
 }]);

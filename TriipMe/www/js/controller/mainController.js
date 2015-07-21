@@ -53,9 +53,8 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
     $('#homeTab').removeClass('active');
     $('#profileTab').removeClass('active');
     $('#favoriteTab').removeClass('active');
-    $('#settingTab').addClass('active'); 
-    $('#myTab').css('display','none');  
-    $scope.popover.show($event);
+    $('#settingTab').addClass('active');       
+    $scope.popover.show($event);    
   };
   $scope.closePopover = function() {
     $scope.popover.hide();
@@ -71,6 +70,7 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
         console.log('You are sure');
         $scope.closePopover();
         fb.unauth();
+        $('#myTab').css('display','none');
         $state.go("login");
       } else {
         console.log('You are not sure');
