@@ -23,6 +23,7 @@ TriipMeApp.controller('signupController', ['$scope',function ($scope) {
                 newUser[userData.uid] = {};
                 newUser[userData.uid].name = "Nguyen Trong Tin"; //  CHANGE WITH ACTUAL DATA
                 newUser[userData.uid].provider = "password"; //  CHANGE WITH ACTUAL DATA
+                newUser[userData.uid].avatar = "img/avatar.jpg"; //  CHANGE WITH ACTUAL DATA
                 fb.child("database").child("users").update(newUser);
             }
         });

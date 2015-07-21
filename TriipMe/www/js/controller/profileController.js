@@ -16,8 +16,9 @@ TriipMeApp.controller('profileController',['$scope','$state','$timeout','userSer
 	$scope.user = {};
 
 	$scope.user.Id = userid;
-	fb.child("database").child("users").child(userid).child("name").once("value", function(data) {
-		$scope.user.Name = data.val();
+	fb.child("database").child("users").child(userid).once("value", function(data) {
+		$scope.user.Name = data.child("name").val();
+		$scope.user.Avatar = data.child("avatar").val();
 		console.log($scope.user.Id);
 		//$scope.blogs = blogsService.getBlogs($scope.user.Id);
 		var blogsRef = fb.child("database").child("blogs");
