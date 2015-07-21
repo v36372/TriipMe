@@ -3,7 +3,7 @@
       <div id="profile-bg"></div>
       <div id="content">
         <div id="profile-info">
-          <img id="profile-image" class="avatar-custom" src="../img/avatar.jpg">
+          <img id="profile-image" class="avatar-custom" ng-src={{user.Avatar}}>
           <h3 id="profile-name" clas ng-model="user.Name">{{user.Name}}</h3>
           <span id="profile-description">The Happiness Way To Enjoy Trully Local Expression</span>
         </div>
@@ -15,7 +15,7 @@
         <div ng-repeat="item in blogs">
             <div class="list card">
                 <div class="item item-avatar avatar-custom">
-                    <img src="img/avatar.jpg" ng-click="viewProfile()">
+                    <img ng-src={{user.Avatar}} ng-click="viewProfile()">
                     <h2 ng-click="viewProfile()">{{user.Name}}</h2>
                     <p>{{item.time}}</p>
                     <button class="button button-clear" style="position:absolute;right:15px;top:15px;" ng-click="redirEdit(item.id)">

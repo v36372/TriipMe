@@ -60,6 +60,7 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
             blog.id = snapshot.key();
             fb.child("database").child("users").child(blog.author).once('value',function(data){
                 blog.authorname = data.child("name").val();
+                blog.authoravatar = data.child("avatar").val();
                 console.log(blog);
                 $scope.blogs.push(blog);
                 $scope.hide();

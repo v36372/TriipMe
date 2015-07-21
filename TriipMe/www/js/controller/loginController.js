@@ -19,7 +19,7 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$timeo
             $scope.hide();
             if (error) {
                 console.log("Login Failed!", error);
-                $scope.showAlert();
+                $scope.showAlert("Wrong credentials","Check your information and try again");
             } else {
                 //console.log(authData.uid.substr(authData.uid.indexOf(":")+1,authData.length));
                 //console.log($location.path());
@@ -38,10 +38,10 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$timeo
         });
     };
 
-    $scope.showAlert = function () {
+    $scope.showAlert = function (title,template) {
         var alertPopup = $ionicPopup.alert({
-            title: 'Wrong Credentials',
-            template: 'Check your Email,Password and try again'
+            title: title,
+            template: template
         });
         alertPopup.then(function (res) {
             //console.log('Thank you for not eating my delicious ice cream cone');
@@ -65,8 +65,8 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$timeo
         fb.authWithOAuthPopup("facebook", function (error, authData) {
             $scope.hide();
             if (error) {
-                console.log("Login Failed!", error);
-                $scope.showAlert();
+                //console.log("Login Failed!", error);
+                //$scope.showAlert();
             } else {
                 //console.log(authData.uid.substr(authData.uid.indexOf(":")+1,authData.length));
                 //console.log($location.path());
@@ -78,6 +78,7 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$timeo
                 var newUser = {};
                 newUser.name = fb.getAuth().facebook.displayName;
                 newUser.provider = "facebook";
+                newUser.avatar = fb.getAuth().facebook.profileImageURL;
                 fb.child("database").child("users").child(fb.getAuth().uid).update(newUser);
                 NameOfUser = fb.getAuth().facebook.displayName;
                 $state.go("home");
