@@ -10,6 +10,20 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
     $scope.newblog.author = NameOfUser;
     $scope.photos=[];
     $scope.photo={};
+    $scope.trips=[{
+        name:"Trip to saigon",
+        time:"07/31/2015",
+        guiderId:"1235430"
+    },{
+        name:"Trip to Ha noi",
+        time:"07/31/2015",
+        guiderId:"1235430"
+    },{
+        name:"Trip to Da nang",
+        time:"07/31/2015",
+        guiderId:"1235430"
+    }];
+
 
     //for (var i = 0; i < 100; i++) {
     //    $scope.photos.push({
