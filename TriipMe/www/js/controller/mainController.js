@@ -1,7 +1,12 @@
-TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ionicPopup','$ionicLoading','$ionicModal',function ($scope,$state,$ionicPopover,$ionicPopup,$ionicLoading,$ionicModal) {
+TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ionicPopup','$ionicLoading','$ionicModal','$ionicHistory',function ($scope,$state,$ionicPopover,$ionicPopup,$ionicLoading,$ionicModal,$ionicHistory) {
   $scope.headerGoBack = function () {
     $ionicHistory.goBack();
-    console.log("hello");
+    if ($ionicHistory.backTitle() === 'Home'){
+      $scope.viewHome();
+    }
+    if ($ionicHistory.backTitle() === 'Profile'){
+      $scope.viewProfile();
+    }    
   }
 
 
@@ -19,8 +24,25 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
     $scope.popover = popover;
   });
 
+  $scope.viewHome = function($event){
+    $('#homeTab').addClass('active');
+    $('#profileTab').removeClass('active');
+    $('#favoriteTab').removeClass('active');
+    $('#settingTab').removeClass('active');
+  }
+  
+  $scope.viewFavorites = function($event){
+    $('#homeTab').removeClass('active');
+    $('#profileTab').removeClass('active');
+    $('#favoriteTab').addClass('active');
+    $('#settingTab').removeClass('active');
+  }
 
   $scope.openPopover = function($event) {
+    $('#homeTab').removeClass('active');
+    $('#profileTab').removeClass('active');
+    $('#favoriteTab').removeClass('active');
+    $('#settingTab').addClass('active');   
     $scope.popover.show($event);
   };
   $scope.closePopover = function() {
@@ -51,7 +73,10 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
   };
 
   $scope.viewProfile = function(){
-    console.log(fb.getAuth().uid);
+    $('#homeTab').removeClass('active');
+    $('#profileTab').addClass('active');
+    $('#favoriteTab').removeClass('active');
+    $('#settingTab').removeClass('active');    
     $state.go('profile',{userid:fb.getAuth().uid});
   };
 
