@@ -9,7 +9,13 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
     }    
   };
 
-
+  $('html').click(function(){
+    $scope.closeModal();
+  })
+  
+  $scope.preventClose = function($event){
+    $event.stopPropagation();
+  }
 
   var template = '<ion-popover-view><ion-header-bar> <h1 class="title">Title</h1> </ion-header-bar> <ion-content>Hello</ion-content></ion-popover-view>';
 
@@ -121,8 +127,9 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
 
   $scope.cmts = [];
 
-  $scope.commentBlog = function(blog){
+  $scope.commentBlog = function($event,blog){
     //console.log(blog.comments.cmts);
+    $event.stopPropagation();
     $scope.blog = blog;
     //$scope.commentContent = "";
 

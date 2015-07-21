@@ -1,4 +1,4 @@
-<ion-modal-view ng-controller="ModalInstanceCtrl">
+<ion-modal-view ng-controller="ModalInstanceCtrl" ng-click="preventClose($event)">
     <ion-header-bar>
         <button class="button" ng-click="closeModal()">
             <i class="icon ion-ios-arrow-left"></i>
