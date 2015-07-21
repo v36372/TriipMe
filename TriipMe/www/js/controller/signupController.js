@@ -17,7 +17,7 @@ TriipMeApp.controller('signupController', ['$scope','$state',function ($scope,$s
             } else {                
                 var newUser = {};
                 newUser[userData.uid] = {};
-                newUser[userData.uid].name = "Nguyen Trong Tin"; //  CHANGE WITH ACTUAL DATA
+                newUser[userData.uid].name = $scope.userName; //  CHANGE WITH ACTUAL DATA
                 newUser[userData.uid].provider = "password"; //  CHANGE WITH ACTUAL DATA
                 newUser[userData.uid].avatar = "img/avatar.jpg"; //  CHANGE WITH ACTUAL DATA
                 fb.child("database").child("users").update(newUser);

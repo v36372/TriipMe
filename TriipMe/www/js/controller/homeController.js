@@ -1,4 +1,4 @@
-TriipMeApp.controller('homeController',['$scope','$state','$timeout','userService','$ionicModal',function($scope,$state,$timeout,userServic,$ionicModal){
+TriipMeApp.controller('homeController',['$scope','$state','$timeout','userService',function($scope,$state,$timeout,userServic){
 
 	// .fromTemplate() method
 	if(fb.getAuth().uid == "")
@@ -66,58 +66,73 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
                 $scope.hide();
             });
 
+            //blogsRef.child(blog.id).child("likes").on("child_changed", function(snapshot) {
+            //    blog.likes.num = snapshot.child("num").val();
+            //    console.log(snapshot.val());
+            //    console.log(snapshot);
+            //});
+
+            blogsRef.child(blog.id).on("child_changed", function(snapshot) {
+                var parentRef = snapshot.ref().parent();
+                parentRef.once("value",function(data){
+                    blog.comments = data.val().comments;
+                    blog.likes = data.val().likes;
+                    console.log(data.val());
+                });
+            });
+
         });
     };
 
     $scope.Init();
 
-    $scope.likeBlog = function(blog){
-        console.log("like");
-        console.log(blog.likes.num);
-        console.log(blog.id);
-        blogsRef.child(blog.id).child("likes").child(fb.getAuth().uid).once("value",function(data){
-            console.log("no");
-            if(data.val() == null){
-                console.log("yes");
-                ++blog.likes.num;
-                blogsRef.child(blog.id).child("likes").update(
-                    {
-                        "num":blog.likes.num
-                    }
-                );
-                var obj = {};
-                obj[fb.getAuth().uid] = true;
-
-                blogsRef.child(blog.id).child("likes").update(obj);
-            }
-        });
-    };
-
-    $scope.loaded = false;
-
-    $scope.cmts = [];
-
-    $scope.commentBlog = function(blog){
-        //console.log(blog.comments.cmts);
-        $scope.blog = blog;
-        //$scope.commentContent = "";
-
-
-        //$scope.cmts.push(blog.comments.cmts);
-        //blog.comments.cmts.forEach(function(cmt){
-        //    $scope.cmts.push(cmt);
-        //});
-        //console.log($scope.cmts);
-        $scope.cmts = [];
-        if(!$scope.loaded){
-            blogsRef.child(blog.id).child("comments").child("cmts").on("child_added", function(snapshot) {
-                $scope.cmts.push(snapshot.val());
-            });
-            $scope.loaded = true;
-        }
-        //$scope.commentContent = "";
-        $scope.openModal();
-    };
+    //$scope.likeBlog = function(blog){
+    //    console.log("like");
+    //    console.log(blog.likes.num);
+    //    console.log(blog.id);
+    //    blogsRef.child(blog.id).child("likes").child(fb.getAuth().uid).once("value",function(data){
+    //        console.log("no");
+    //        if(data.val() == null){
+    //            console.log("yes");
+    //            ++blog.likes.num;
+    //            blogsRef.child(blog.id).child("likes").update(
+    //                {
+    //                    "num":blog.likes.num
+    //                }
+    //            );
+    //            var obj = {};
+    //            obj[fb.getAuth().uid] = true;
+    //
+    //            blogsRef.child(blog.id).child("likes").update(obj);
+    //        }
+    //    });
+    //};
+    //
+    //$scope.loaded = false;
+    //
+    //$scope.cmts = [];
+    //
+    //$scope.commentBlog = function(blog){
+    //    //console.log(blog.comments.cmts);
+    //    $scope.blog = blog;
+    //    //$scope.commentContent = "";
+    //
+    //
+    //    //$scope.cmts.push(blog.comments.cmts);
+    //    //blog.comments.cmts.forEach(function(cmt){
+    //    //    $scope.cmts.push(cmt);
+    //    //});
+    //    //console.log($scope.cmts);
+    //    $scope.cmts = [];
+    //    if(!$scope.loaded){
+    //        blogsRef.child(blog.id).child("comments").child("cmts").on("child_added", function(snapshot) {
+    //            $scope.cmts.push(snapshot.val());
+    //        });
+    //        $scope.loaded = true;
+    //    }
+    //    //$scope.commentContent = "";
+    //    $scope.openModal();
+    //};
 
     //$scope.sendComment = function(blog,commentContent){
     //    console.log(blog);
@@ -146,40 +161,40 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
     //    //$scope.Init();
     //};
 
-    $scope.shareBlog = function(){
+    //$scope.shareBlog = function(){
+    //
+    //};
 
-    };
-
-    $ionicModal.fromTemplateUrl('view/template/commentModalTemplate.html', {
-        scope: $scope,
-        controller:'ModalInstanceCtrl',
-        animation: 'slide-in-up'
-    }).then(function(modal) {
-        $scope.modal = modal;
-        //$scope.commentContent = commentContent;
-    });
-
-    $scope.openModal = function() {
-        $scope.modal.show();
-    };
-    $scope.closeModal = function() {
-        $scope.loaded = false;
-        blogsRef.child($scope.blog.id).child("comments").child("cmts").off("child_added");
-        //ref.off("value");
-        $scope.modal.hide();
-    };
-    //Cleanup the modal when we're done with it!
-    $scope.$on('$destroy', function() {
-        $scope.modal.remove();
-    });
-    // Execute action on hide modal
-    $scope.$on('modal.hidden', function() {
-        // Execute action
-    });
-    // Execute action on remove modal
-    $scope.$on('modal.removed', function() {
-        // Execute action
-    });
+    //$ionicModal.fromTemplateUrl('view/template/commentModalTemplate.html', {
+    //    scope: $scope,
+    //    controller:'ModalInstanceCtrl',
+    //    animation: 'slide-in-up'
+    //}).then(function(modal) {
+    //    $scope.modal = modal;
+    //    //$scope.commentContent = commentContent;
+    //});
+    //
+    //$scope.openModal = function() {
+    //    $scope.modal.show();
+    //};
+    //$scope.closeModal = function() {
+    //    $scope.loaded = false;
+    //    blogsRef.child($scope.blog.id).child("comments").child("cmts").off("child_added");
+    //    //ref.off("value");
+    //    $scope.modal.hide();
+    //};
+    ////Cleanup the modal when we're done with it!
+    //$scope.$on('$destroy', function() {
+    //    $scope.modal.remove();
+    //});
+    //// Execute action on hide modal
+    //$scope.$on('modal.hidden', function() {
+    //    // Execute action
+    //});
+    //// Execute action on remove modal
+    //$scope.$on('modal.removed', function() {
+    //    // Execute action
+    //});
 }]);
 
 

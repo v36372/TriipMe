@@ -33,7 +33,7 @@ TriipMeApp.controller('profileController',['$scope','$state','$timeout','userSer
 			console.log("fired");
 			$scope.hide();
 		});
-		$timeout(function(){$scope.$apply();console.log("backfired");},500);
+		$timeout(function(){$scope.$apply();console.log("backfired");$scope.hide();},500);
 	});
 	//$scope.user = userService.getUser(userid);
 	//$scope.blogs = blogsService.getBlogs($scope.user.Id);
