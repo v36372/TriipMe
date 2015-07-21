@@ -39,7 +39,7 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
     $scope.blogs = [];
     $scope.userName = fb.child("database").child("users").child(fb.getAuth().uid).child("name");
 
-    console.log(fb.getAuth().uid);
+    console.log(fb.getAuth());
     var blogsRef = fb.child("database").child("blogs");
 
     $scope.Init = function()
