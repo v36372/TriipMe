@@ -8,8 +8,6 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
     $scope.newblog.comments = {};
     $scope.newblog.likes.num = 0;
     $scope.newblog.comments.num = 0;
-    $scope.newblog.time = (new Date()).getTime();
-    $scope.newblog.author = fb.getAuth().uid;
     $scope.photos=[];
     $scope.photo={};
     $scope.trips=[{
@@ -37,6 +35,8 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
 
     $scope.createBlog = function(){
         var blogsRef = fb.child("database").child("blogs");
+        $scope.newblog.time = (new Date()).getTime();
+        $scope.newblog.author = fb.getAuth().uid;
         blogsRef.push($scope.newblog);
         Camera.cleanup(null,null);
     };

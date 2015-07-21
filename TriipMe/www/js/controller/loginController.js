@@ -32,7 +32,7 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$timeo
                 //}
                 fb.child("database").child("users").child(fb.getAuth().uid).child("name").once("value", function (data) {
                     NameOfUser = data.val();
-                    $scope.hide();
+                    //$scope.hide();
                     $state.go("home");
                 });
                 //NameOfUser = fb.child("database").child("users").child(fb.getAuth().uid).child("name").val();
@@ -60,4 +60,32 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$timeo
             controller:'signupController',
         });
     }
+
+    //LOGIN WITH FACEBOOK
+    $scope.loginwithFacebook = function() {
+        $scope.show();
+        fb.authWithOAuthPopup("facebook", function (error, authData) {
+            $scope.hide();
+            if (error) {
+                console.log("Login Failed!", error);
+                $scope.showAlert();
+            } else {
+                //console.log(authData.uid.substr(authData.uid.indexOf(":")+1,authData.length));
+                //console.log($location.path());
+                //$location.path('/home');
+
+                //if (!$scope.$$phase) {
+                //    $scope.$apply(function() { $location.path("/home"); });
+                //}
+                var newUser = {};
+                newUser.name = fb.getAuth().facebook.displayName;
+                newUser.provider = "facebook";
+                fb.child("database").child("users").child(fb.getAuth().uid).update(newUser);
+                NameOfUser = fb.getAuth().facebook.displayName;
+                $state.go("home");
+                //NameOfUser = fb.child("database").child("users").child(fb.getAuth().uid).child("name").val();
+            }
+        });
+    }
+
 }]);
