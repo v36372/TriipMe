@@ -1,7 +1,12 @@
-TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ionicPopup','$ionicLoading',function ($scope,$state,$ionicPopover,$ionicPopup,$ionicLoading) {
+TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ionicPopup','$ionicLoading','$ionicHistory',function ($scope,$state,$ionicPopover,$ionicPopup,$ionicLoading,$ionicHistory) {
   $scope.headerGoBack = function () {
     $ionicHistory.goBack();
-    console.log("hello");
+    if ($ionicHistory.backTitle() === 'Home'){
+      $scope.viewHome();
+    }
+    if ($ionicHistory.backTitle() === 'Profile'){
+      $scope.viewProfile();
+    }    
   }
 
 
@@ -67,7 +72,6 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
     $('#profileTab').addClass('active');
     $('#favoriteTab').removeClass('active');
     $('#settingTab').removeClass('active');    
-    console.log(fb.getAuth().uid);
     $state.go('profile',{userid:fb.getAuth().uid});
   };
 
