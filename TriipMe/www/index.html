@@ -28,7 +28,9 @@
     <!-- AngularFire -->
     <script src="https://cdn.firebase.com/libs/angularfire/1.1.2/angularfire.min.js"></script>
 
+    
     <!-- APP.JS -->
+    <script src="js/jquery/jquery-1.11.1.min.js" ></script>   
     <script src="js/app.js"></script>
     <!-- include source code-->
     <script src="js/route.js"></script>
@@ -59,19 +61,19 @@
 
       <div id="myTab" class="tabs-striped  has-tabs tabs-color-calm" >
         <div class="tabs">
-          <a class="tab-item active" href="#home">
+          <a id="homeTab" class="tab-item active" href="#home" ng-click="viewHome()">
             <i class="icon ion-home"></i>
             Home
           </a>
-          <a class="tab-item" href="#" ng-click="viewProfile()">
+          <a id="profileTab" class="tab-item" href="#" ng-click="viewProfile()">
             <i class="icon ion-android-person"></i>
             Profile
           </a>
-          <a class="tab-item" href="#">
+          <a id="favoriteTab" class="tab-item" href="#" ng-click="viewFavorites()">
             <i class="icon ion-android-notifications-none"></i>
             Favorites
           </a>
-          <a class="tab-item" ng-click="openPopover($event)">
+          <a id="settingTab" class="tab-item" ng-click="openPopover($event)">
             <i class="icon ion-gear-a"></i>
             Settings
           </a>

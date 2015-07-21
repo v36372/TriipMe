@@ -19,8 +19,25 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
     $scope.popover = popover;
   });
 
+  $scope.viewHome = function($event){
+    $('#homeTab').addClass('active');
+    $('#profileTab').removeClass('active');
+    $('#favoriteTab').removeClass('active');
+    $('#settingTab').removeClass('active');
+  }
+  
+  $scope.viewFavorites = function($event){
+    $('#homeTab').removeClass('active');
+    $('#profileTab').removeClass('active');
+    $('#favoriteTab').addClass('active');
+    $('#settingTab').removeClass('active');
+  }
 
   $scope.openPopover = function($event) {
+    $('#homeTab').removeClass('active');
+    $('#profileTab').removeClass('active');
+    $('#favoriteTab').removeClass('active');
+    $('#settingTab').addClass('active');   
     $scope.popover.show($event);
   };
   $scope.closePopover = function() {
@@ -46,6 +63,10 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
   };
 
   $scope.viewProfile = function(){
+    $('#homeTab').removeClass('active');
+    $('#profileTab').addClass('active');
+    $('#favoriteTab').removeClass('active');
+    $('#settingTab').removeClass('active');    
     console.log(fb.getAuth().uid);
     $state.go('profile',{userid:fb.getAuth().uid});
   };
