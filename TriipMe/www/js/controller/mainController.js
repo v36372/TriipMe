@@ -125,8 +125,6 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
   var blogsRef = fb.child("database").child("blogs");
   $scope.loaded = false;
 
-  $scope.cmts = [];
-
   $scope.commentBlog = function($event,blog){
     //console.log(blog.comments.cmts);
     $event.stopPropagation();
