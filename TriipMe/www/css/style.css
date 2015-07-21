@@ -6,7 +6,7 @@
     justify-content: center;
 }
 .available-scroller {
-    height: 250px;
+    /*height: 250px;*/
 }
 
 .avatar-custom > img:hover{
