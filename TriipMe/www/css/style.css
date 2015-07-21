@@ -6,7 +6,11 @@
     justify-content: center;
 }
 .available-scroller {
-    /*height: 250px;*/
+    height: 250px;
+}
+
+#img-container{
+  height: 0px;
 }
 
 .avatar-custom > img:hover{

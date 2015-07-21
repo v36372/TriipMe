@@ -67,8 +67,8 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
         $state.go('home');    
     };
 
-    $scope.choosePicture = function(){
-        $scope.imageHandle(Camera.PictureSourceType.PHOTOLIBRARY);
+    $scope.choosePicture = function(){        
+        $scope.imageHandle(Camera.PictureSourceType.PHOTOLIBRARY);        
     };
 
     $scope.takePicture = function(){
@@ -93,6 +93,7 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
             var imgURI = "data:image/jpeg;base64," + imageData;
             $scope.newblog.img = imageData;
             $scope.photos.push(imgURI);
+            $('#img-container').css('height','250px')
         }, function(err) {
            console.log(err);
         });
