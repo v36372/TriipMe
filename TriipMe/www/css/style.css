@@ -127,9 +127,9 @@ div.transbox {
 }
 
 .item{
-    overflow: inherit ;
-    text-overflow: inherit ;
-    white-space: normal ;
+    overflow: inherit;
+    text-overflow: inherit;
+    white-space: normal;
 }
 
 .line{
@@ -146,3 +146,6 @@ div.transbox {
   font-size: 20px;
 }
 
+#myTab{
+  display: none;
+}

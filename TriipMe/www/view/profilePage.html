@@ -25,7 +25,7 @@
 
                 <div class="item item-body">
                     <!--<img class="full-image" data-ng-src="data:image/png;base64,{{item.img}}">-->
-                    <img class="full-image" ng-src={{item.img}}>
+                    <img class="full-image" data-ng-src=data:image/png;base64,{{item.img}}>
                     <p>
                         {{item.desc}}
                     </p>
@@ -40,7 +40,7 @@
                         <i class="icon ion-thumbsup"></i>
                         Like
                     </a>
-                    <a class="tab-item" ng-click="commentBlog(item)">
+                    <a class="tab-item" ng-click="commentBlog($event,item)">
                         <i class="icon ion-chatbox"></i>
                         Comment
                     </a>

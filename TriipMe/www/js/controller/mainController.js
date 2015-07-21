@@ -3,13 +3,24 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
     $ionicHistory.goBack();
     if ($ionicHistory.backTitle() === 'Home'){
       $scope.viewHome();
+      $('#myTab').css('display','block');
     }
     if ($ionicHistory.backTitle() === 'Profile'){
       $scope.viewProfile();
+      $('#myTab').css('display','block');
     }    
+    if ($ionicHistory.backTitle() === 'TriipMe Login'){
+      $('#myTab').css('display','none');
+    }
   }
 
-
+  $('html').click(function(){
+    $scope.closeModal();
+  })
+  
+  $scope.preventClose = function($event){
+    $event.stopPropagation();
+  }
 
   var template = '<ion-popover-view><ion-header-bar> <h1 class="title">Title</h1> </ion-header-bar> <ion-content>Hello</ion-content></ion-popover-view>';
 
@@ -42,7 +53,8 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
     $('#homeTab').removeClass('active');
     $('#profileTab').removeClass('active');
     $('#favoriteTab').removeClass('active');
-    $('#settingTab').addClass('active');   
+    $('#settingTab').addClass('active'); 
+    $('#myTab').css('display','none');  
     $scope.popover.show($event);
   };
   $scope.closePopover = function() {
@@ -121,8 +133,9 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
 
   $scope.cmts = [];
 
-  $scope.commentBlog = function(blog){
+  $scope.commentBlog = function($event,blog){
     //console.log(blog.comments.cmts);
+    $event.stopPropagation();
     $scope.blog = blog;
     //$scope.commentContent = "";
 
