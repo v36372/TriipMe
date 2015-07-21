@@ -19,9 +19,9 @@ TriipMeApp.controller('signupController', ['$scope','$state',function ($scope,$s
                 newUser[userData.uid] = {};
                 newUser[userData.uid].name = $scope.userName; //  CHANGE WITH ACTUAL DATA
                 newUser[userData.uid].provider = "password"; //  CHANGE WITH ACTUAL DATA          
-                fb.child("database").child("users").update(newUser);
+                fb.child("database").child("users").update(newUser);                
                 $scope.popup.close();
-                $scope.login();
+                $scope.login(newUser[userData.uid]);
             }
         });
     };
@@ -29,7 +29,7 @@ TriipMeApp.controller('signupController', ['$scope','$state',function ($scope,$s
         console.log('Closing in controller!');
         $scope.popup.close();
     };        
-    $scope.login = function () {
+    $scope.login = function (newUser) {
         $scope.show();        
         fb.authWithPassword({
             email: $scope.userEmail,
@@ -40,6 +40,7 @@ TriipMeApp.controller('signupController', ['$scope','$state',function ($scope,$s
                 console.log("Login Failed!", error);
                 $scope.showAlert();
             } else {
+                fb.child("database").child("users").child(fb.getAuth().uid).update(newUser);
                 fb.child("database").child("users").child(fb.getAuth().uid).child("name").once("value", function (data) {
                     NameOfUser = data.val();
                     $state.go("home");

@@ -7,8 +7,6 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$timeo
 
     $scope.login = function () {
         $scope.show();
-        console.log($scope.logInfo.username);
-        console.log($scope.logInfo.password);
         if ($scope.logInfo.username == "" || $scope.logInfo.password == "") {
             $scope.hide();
             //$scope.username = "hihji";
