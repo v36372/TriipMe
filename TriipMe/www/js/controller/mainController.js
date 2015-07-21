@@ -14,9 +14,9 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
     }
   }
 
-  $('html').click(function(){
-    $scope.closeModal();
-  })
+  //$('html').click(function(){
+  //  $scope.closeModal();
+  //})
   
   $scope.preventClose = function($event){
     $event.stopPropagation();
@@ -40,14 +40,14 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
     $('#profileTab').removeClass('active');
     $('#favoriteTab').removeClass('active');
     $('#settingTab').removeClass('active');
-  }
+  };
   
   $scope.viewFavorites = function($event){
     $('#homeTab').removeClass('active');
     $('#profileTab').removeClass('active');
     $('#favoriteTab').addClass('active');
     $('#settingTab').removeClass('active');
-  }
+  };
 
   $scope.openPopover = function($event) {
     $('#homeTab').removeClass('active');
@@ -130,9 +130,7 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
 
   var blogsRef = fb.child("database").child("blogs");
   $scope.loaded = false;
-
   $scope.cmts = [];
-
   $scope.commentBlog = function($event,blog){
     //console.log(blog.comments.cmts);
     $event.stopPropagation();
@@ -145,7 +143,7 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
     //    $scope.cmts.push(cmt);
     //});
     //console.log($scope.cmts);
-    $scope.cmts = [];
+
     if(!$scope.loaded){
       blogsRef.child(blog.id).child("comments").child("cmts").on("child_added", function(snapshot) {
         $scope.cmts.push(snapshot.val());
@@ -172,6 +170,7 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
   $scope.openModal = function() {
     $scope.modal.show();
   };
+
   $scope.closeModal = function() {
     $scope.loaded = false;
     blogsRef.child($scope.blog.id).child("comments").child("cmts").off("child_added");
