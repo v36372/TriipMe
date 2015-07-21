@@ -5,7 +5,17 @@
         <img src="img/logo.jpg" class="logo">
       </div>
       <div class="transbox">
-        <div class="input">
+        <div>
+          <div class="col">
+            <button class="button button-block button-positive" id="button-facebook" ng-click="loginwithFacebook()">LOGIN WIH FACEBOOK</button>
+          </div>
+        </div>
+        <div class="line">
+        <span class="inline-text">
+          &nbsp &nbsp or &nbsp &nbsp
+        </span>
+      </div>
+        <div class="input" id="form">
           <label class="item item-input item-input-login">
             <input type="text" placeholder="Email" ng-model="logInfo.username">
           </label>
@@ -14,20 +24,29 @@
           </label>
         </div>
         <div class="row">
-          <div class="col">
-            <button class="button button-block button-positive" id="button-login" ng-click="login()">Login</button>
-          </div>
-        </div>
-        <div>
-          <div class="col">
-            <button class="button button-block button-balanced" id="button-login" ng-click="loginwithFacebook()">Login with facebook</button>
-          </div>
+            <li class="item item-checkbox" id="remember-me">
+              <label class="checkbox" id="checkbox-remember">
+                <input type="checkbox">
+              </label>Remember me </li>
         </div>
         <div class="row">
           <div class="col">
-            <button class="button button-block button-balanced" id="button-login" ng-click="signUp()">Sign Up</button>
+            <button class="button button-block button-calm" id="button-login" ng-click="login()">LOGIN</button>
           </div>
-        </div>        
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <button class="button button-block button-calm" id="button-login" ng-click="signUp()">NEW ACCOUNT</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col" id="forget-pass">
+            <button class="button button-clear button-calm" >
+              Forgot your password?
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </ion-content>
