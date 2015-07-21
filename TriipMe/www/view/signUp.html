@@ -1,21 +1,24 @@
 <div ng-controller="signupController">
-  <label class="item item-input">
-      <input type="text" placeholder="Email" ng-model="newUsername">
+    <label class="item item-input">
+      <input type="text" placeholder="Name" ng-model="userName">
     </label>
     <label class="item item-input">
-      <input type="password" placeholder="Password" ng-model="newPassword">
+      <input type="text" placeholder="Email" ng-model="userEmail">
     </label>
     <label class="item item-input">
-      <input type="password" placeholder="Confirm Password" ng-model="newPassword2">
+      <input type="password" placeholder="Password" ng-model="userPassword">
+    </label>
+    <label class="item item-input">
+      <input type="password" placeholder="Confirm Password" ng-model="confirmPassword">
     </label> 
       <table>
       <th class="button-login">
-        <button class="button button-block button-balanced"  id="button-login" ng-click="create()" align="center">
+        <button class="button button-block button-balanced"  id="button-login" ng-click="createUser()" align="center">
           Sign Up
         </button>
       <th/>
       <th class="button-login">
-        <button class="button button-block button-light" id="button-login" ng-click="cancel()" align="center">
+        <button class="button button-block button-light" id="button-login" ng-click="cancelSignup()" align="center">
           Cancel
         </button>
       <th/>
