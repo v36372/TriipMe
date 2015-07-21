@@ -146,3 +146,6 @@ div.transbox {
   font-size: 20px;
 }
 
+#myTab{
+  display: none;
+}
