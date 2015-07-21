@@ -1,27 +1,22 @@
-TriipMeApp.controller('loginController', ['$scope', '$ionicPopup', '$state','$timeout','$ionicLoading', function ($scope, $ionicPopup, $state,$timeout,$ionicLoading) {
+TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$timeout',function($scope,$ionicPopup,$state,$timeout){
 
     // VARIABLES INITIALIZATION
-    $scope.username = "nguyentrongtin2331@gmail.com";
-    $scope.password = "admin";
-
-    $scope.show = function() {
-        $ionicLoading.show({
-            template: '<ion-spinner icon="crescent" class="spinner-positive"></ion-spinner>'
-        });
-    };
-    $scope.hide = function(){
-        $ionicLoading.hide();
-    };
+    $scope.logInfo = {};
+    $scope.logInfo.username = "";
+    $scope.logInfo.password = "";
 
     $scope.login = function () {
         $scope.show();
-        console.log($scope.username);
-        console.log($scope.password);
-        if ($scope.username == "" || $scope.password == "")
+        console.log($scope.logInfo.username);
+        console.log($scope.logInfo.password);
+        if ($scope.logInfo.username == "" || $scope.logInfo.password == "") {
+            $scope.hide();
+            //$scope.username = "hihji";
             return;
+        }
         fb.authWithPassword({
-            email: $scope.username,
-            password: $scope.password
+            email: $scope.logInfo.username,
+            password: $scope.logInfo.password
         }, function (error, authData) {
             $scope.hide();
             if (error) {
@@ -37,9 +32,10 @@ TriipMeApp.controller('loginController', ['$scope', '$ionicPopup', '$state','$ti
                 //}
                 fb.child("database").child("users").child(fb.getAuth().uid).child("name").once("value", function (data) {
                     NameOfUser = data.val();
+                    $scope.hide();
+                    $state.go("home");
                 });
                 //NameOfUser = fb.child("database").child("users").child(fb.getAuth().uid).child("name").val();
-                $state.go("home");
             }
         });
     };
@@ -53,30 +49,15 @@ TriipMeApp.controller('loginController', ['$scope', '$ionicPopup', '$state','$ti
             //console.log('Thank you for not eating my delicious ice cream cone');
         });
     };
+    //var savedPopup;
+    $scope.popup;
 
-    $scope.signUp = function () {
-        //$scope.data = {}
-        //
-        //// An elaborate, custom popup
-        //var myPopup = $ionicPopup.show({
-        //    templateUrl: '../../view/signUp.html',
-        //    title:'Sign up',
-        //    subTitle: 'Create a new account'
-        //});
-        //myPopup.then(function (res) {
-        //    console.log('Tapped!', res);
-        //});
-        //
-        //$scope.myPopup = myPopup;
-        //console.log("open");
-        //$timeout(function () {
-        //    myPopup.close(); //close the popup after 3 seconds for some reason
-        //}, 3000);
-    };
-
-    $scope.cancel = function(){
-        console.log("cclose");
-        $scope.myPopup.close();
-    };
-
+    $scope.signUp = function() {
+        $scope.popup = $ionicPopup.show({
+            templateUrl:  'view/signUp.html',
+            title: 'Join us',
+            scope: $scope,
+            controller:'signupController',
+        });
+    }
 }]);

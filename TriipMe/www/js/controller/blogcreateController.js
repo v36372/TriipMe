@@ -1,13 +1,15 @@
-TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state','$timeout',function($scope,$cordovaCamera,$state,$timeout){
+TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state',function($scope,$cordovaCamera,$state){
     if(fb.getAuth().uid == "")
         $state.go("login");
 
     console.log(fb.getAuth().uid);
     $scope.newblog = {};
-    $scope.newblog.like = 0;
-    $scope.newblog.cmt = 0;
+    $scope.newblog.likes = {};
+    $scope.newblog.comments = {};
+    $scope.newblog.likes.num = 0;
+    $scope.newblog.comments.num = 0;
     $scope.newblog.time = (new Date()).getTime();
-    $scope.newblog.author = NameOfUser;
+    $scope.newblog.author = fb.getAuth().uid;
     $scope.photos=[];
     $scope.photo={};
     $scope.trips=[{
@@ -34,7 +36,7 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
     //};
 
     $scope.createBlog = function(){
-        var blogsRef = fb.child("database").child("users").child(fb.getAuth().uid).child("blogs");
+        var blogsRef = fb.child("database").child("blogs");
         blogsRef.push($scope.newblog);
         Camera.cleanup(null,null);
     };

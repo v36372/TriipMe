@@ -22,9 +22,13 @@ TriipMeApp.config(function($stateProvider, $urlRouterProvider) {
             controller: "loginController"
         })
         .state('profile',{
+            params: {
+                userid:{}
+            },
             url: '/profile',
             templateUrl: 'view/profilePage.html',
-            controller: "profileController"
+            controller: "profileController",
+            data: {'userid':'userid'}
         })
         .state("home", {
             url: "/home",

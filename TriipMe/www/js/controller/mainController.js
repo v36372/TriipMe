@@ -1,8 +1,10 @@
-TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ionicPopup',function ($scope,$state,$ionicPopover,$ionicPopup) {
+TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ionicPopup','$ionicLoading',function ($scope,$state,$ionicPopover,$ionicPopup,$ionicLoading) {
   $scope.headerGoBack = function () {
     $ionicHistory.goBack();
     console.log("hello");
   }
+
+
 
   var template = '<ion-popover-view><ion-header-bar> <h1 class="title">Title</h1> </ion-header-bar> <ion-content>Hello</ion-content></ion-popover-view>';
 
@@ -33,8 +35,9 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
     confirmPopup.then(function(res) {
       if(res) {
         console.log('You are sure');
-        $state.go("login");
         $scope.closePopover();
+        fb.unauth();
+        $state.go("login");
       } else {
         console.log('You are not sure');
         $scope.closePopover();
@@ -42,8 +45,22 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
     });
   };
 
+  $scope.viewProfile = function(){
+    console.log(fb.getAuth().uid);
+    $state.go('profile',{userid:fb.getAuth().uid});
+  };
+
   $scope.isLoggedIn = false;
   //console.log(fb.getAuth().uid);
   //console.log($state);
   //$scope.url = $state.url();
+
+  $scope.show = function() {
+    $ionicLoading.show({
+      template: '<ion-spinner icon="lines" class="spinner-positive"></ion-spinner>'
+    });
+  };
+  $scope.hide = function(){
+    $ionicLoading.hide();
+  };
 }]);
