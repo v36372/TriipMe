@@ -222,6 +222,7 @@ TriipMeApp.controller('ModalInstanceCtrl', function ($scope) {
                 {
                     "author":fb.getAuth().uid,
                     "authorname":NameOfUser,
+                    "authoravatar":AvatarOfUser,
                     "content":$scope.cmt.content
                 }
             );

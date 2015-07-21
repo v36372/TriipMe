@@ -9,8 +9,8 @@
         <div ng-repeat="cmt in cmts">
             <div class="card">
             <div class="item item-avatar">
-                <img src="img/avatar.jpg">
-                <h2>{{cmt.authorname}}</h2>
+                <img ng-src={{cmt.authoravatar}} ng-click="viewUserProfile(cmt.author)">
+                <h2 ng-click="viewUserProfile(cmt.author)">{{cmt.authorname}}</h2>
                 <p>{{cmt.time}}</p>
                 <p>{{cmt.content}}</p>
             </div>

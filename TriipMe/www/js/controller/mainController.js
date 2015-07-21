@@ -45,6 +45,11 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
     });
   };
 
+  $scope.viewUserProfile = function(uid){
+    $scope.closeModal();
+    $state.go('profile',{userid:uid});
+  };
+
   $scope.viewProfile = function(){
     console.log(fb.getAuth().uid);
     $state.go('profile',{userid:fb.getAuth().uid});
