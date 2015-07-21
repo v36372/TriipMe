@@ -31,8 +31,8 @@
                         {{item.desc}}
                     </p>
                     <p>
-                        <a class="subdued">{{item.likes.num}} Like</a>
-                        <a class="subdued">{{item.comments.num}} Comments</a>
+                        <a class="subdued" ng-click="likeBlog(item)">{{item.likes.num}} Like</a>
+                        <a class="subdued" ng-click="commentBlog($event,item)">{{item.comments.num}} Comments</a>
                     </p>
                 </div>
                 <div class="item tabs tabs-secondary tabs-icon-left">
