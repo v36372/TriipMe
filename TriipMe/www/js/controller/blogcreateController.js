@@ -10,19 +10,8 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
     $scope.newblog.comments.num = 0;
     $scope.photos=[];
     $scope.photo={};
-    $scope.trips=[{
-        name:"Trip to saigon",
-        time:"07/31/2015",
-        guiderId:"1235430"
-    },{
-        name:"Trip to Ha noi",
-        time:"07/31/2015",
-        guiderId:"1235430"
-    },{
-        name:"Trip to Da nang",
-        time:"07/31/2015",
-        guiderId:"1235430"
-    }];
+    $scope.newblog.events=[];
+    $scope.event={};
 
 
     //for (var i = 0; i < 100; i++) {
@@ -37,7 +26,43 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
         var blogsRef = fb.child("database").child("blogs");
         $scope.newblog.time = (new Date()).getTime();
         $scope.newblog.author = fb.getAuth().uid;
-        blogsRef.push($scope.newblog);        
+
+        /* This code should be functional when photo.date is ready
+        $scope.event = {};
+        $scope.photosDate=[];
+        $scope.photos.forEach(function(photo){
+
+            //if this photo date is the new day, note that each event should be classified by date not exact time (Day 1, day 2, ...)
+            if($scope.photosDate.indexOf(photo.date)==-1){
+                $scope.photosDate.push(photo.date);
+                $scope.event.title= photo.date;
+                $scope.event.imageList.push(photo);
+                $scope.event.description="Having fun with Triip@ "+ photo.location;
+                $scope.newblog.events.push($scope.event);
+                $scope.event={};
+            }
+            else
+            {
+                  for (var i=0; i<$scope.newblog.events.length; i++) {
+                        if($scope.newblog.events[i].title==photo.date){
+                            $scope.newblog.events[i].imageList.push(photo);
+                            }                 
+                        };
+            };
+
+        });
+        if($scope.newblog.events.length==0)
+        {
+            $scope.event.title= (new Date()).getTime();
+            $scope.event.description="Having fun with Triip, sorry no image now";
+            $scope.newblog.events.push($scope.event);
+
+        }
+        */
+        blogsRef.push($scope.newblog);   
+
+
+
         Camera.cleanup(null,null);    
         $state.go('home');    
     };
