@@ -4,6 +4,7 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$timeo
     $scope.logInfo = {};
     $scope.logInfo.username = "";
     $scope.logInfo.password = "";
+    $('#myTab').css('display','none');
 
     $scope.login = function () {
         $scope.show();
