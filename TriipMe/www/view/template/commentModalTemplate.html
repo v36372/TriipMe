@@ -8,11 +8,11 @@
     <ion-content>
         <div ng-repeat="cmt in cmts">
             <div class="card">
-            <div class="item item-avatar">
+            <div class="item item-avatar item-text-wrap"">
                 <img ng-src={{cmt.authoravatar}} ng-click="viewUserProfile(cmt.author)">
                 <h2 ng-click="viewUserProfile(cmt.author)">{{cmt.authorname}}</h2>
                 <p>{{cmt.time}}</p>
-                <p>{{cmt.content}}</p>
+                <p class="item">{{cmt.content}}</p>
             </div>
             </div>
         </div>
