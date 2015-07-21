@@ -7,7 +7,7 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
     if ($ionicHistory.backTitle() === 'Profile'){
       $scope.viewProfile();
     }    
-  }
+  };
 
 
 
@@ -29,14 +29,14 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
     $('#profileTab').removeClass('active');
     $('#favoriteTab').removeClass('active');
     $('#settingTab').removeClass('active');
-  }
+  };
   
   $scope.viewFavorites = function($event){
     $('#homeTab').removeClass('active');
     $('#profileTab').removeClass('active');
     $('#favoriteTab').addClass('active');
     $('#settingTab').removeClass('active');
-  }
+  };
 
   $scope.openPopover = function($event) {
     $('#homeTab').removeClass('active');
