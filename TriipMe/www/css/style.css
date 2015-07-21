@@ -109,3 +109,9 @@ div.transbox {
 .popup-container .popup{
   width: 420px!important;
 }
+
+.item{
+    overflow: inherit ;
+    text-overflow: inherit ;
+    white-space: normal ;
+}
