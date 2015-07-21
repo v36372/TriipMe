@@ -44,6 +44,13 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
 
     $scope.Init = function()
     {
+        blogsRef.once("value",function(data){
+            if(data.val() == null)
+                $scope.hide();
+            //$scope.hide();
+            console
+        });
+
         blogsRef.orderByChild("time").limitToLast(5).on("child_added", function (snapshot) {
             //var blog = {};
             //blog.title = snapshot.val()
@@ -54,12 +61,8 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
             fb.child("database").child("users").child(blog.author).once('value',function(data){
                 blog.authorname = data.child("name").val();
                 console.log(blog);
-                $timeout(function () {
-                    $scope.$apply();
-                    //console.log("45454");
-                    $scope.blogs.push(blog);
-                    $scope.hide();
-                }, 10);
+                $scope.blogs.push(blog);
+                $scope.hide();
             });
 
         });

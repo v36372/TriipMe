@@ -21,16 +21,18 @@ TriipMeApp.controller('profileController',['$scope','$state','$timeout','userSer
 		console.log($scope.user.Id);
 		//$scope.blogs = blogsService.getBlogs($scope.user.Id);
 		var blogsRef = fb.child("database").child("blogs");
-		var blogs = [];
+		$scope.blogs = [];
+		var time = 0;
 		blogsRef.orderByChild("author").equalTo($scope.user.Id).limitToLast(5).on("child_added", function(snapshot) {
+			time++;
 			var blog = snapshot.val();
 			blog.time = (new Date(blog.time)).toDateString();
 			blog.id = snapshot.key();
-			blogs.push(blog);
+			$scope.blogs.push(blog);
+			console.log("fired");
+			$scope.hide();
 		});
-		$scope.blogs = blogs;
-		$scope.hide();
-		$timeout(function(){$scope.$apply()},0);
+		$timeout(function(){$scope.$apply();console.log("backfired");},500);
 	});
 	//$scope.user = userService.getUser(userid);
 	//$scope.blogs = blogsService.getBlogs($scope.user.Id);
