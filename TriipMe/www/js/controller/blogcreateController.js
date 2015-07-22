@@ -29,34 +29,101 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
 
         ////This code should be functional when photo.date is ready
         $scope.event = {};
-        $scope.photosDate=[];
+        //$scope.photosDate=[];
         $scope.event.imageList = [];
+        //$scope.trips = [];
+
+        var tripRef = fb.child("database").child("trips").child(fb.getAuth().uid);
+        //tripRef.once(fb.getAuth().uid,function(snapshot){
+        //    console.log(snapshot.val());
+        //    $scope.trips.push(snapshot.val());
+        //});
+
         $scope.photos.forEach(function(photo){
-
             //if this photo date is the new day, note that each event should be classified by date not exact time (Day 1, day 2, ...)
-            if($scope.photosDate.indexOf(photo.date)==-1){
-                $scope.photosDate.push(photo.date);
-                $scope.event.title= photo.date;
-                $scope.event.imageList.push(photo);
-                $scope.event.description="Having fun with Triip@ "+ photo.location;
-                $scope.newblog.events.push($scope.event);
-                $scope.event={};
-            }
-            else
-            {
-                  for (var i=0; i<$scope.newblog.events.length; i++) {
-                        if($scope.newblog.events[i].title==photo.date){
-                            $scope.newblog.events[i].imageList.push(photo);
-                            }
-                        };
-            };
+            //if($scope.photosDate.indexOf(photo.date)==-1){
+            //    $scope.photosDate.push(photo.date);
+            //    $scope.event.title= photo.date;
+            //    $scope.event.description="Having fun with Triip@ "+ photo.location;
+            //
+            //    tripRef.orderByChild("time_from").endAt(photo.date).once("value", function(snapshot) {
+            //        var trip = snapshot.val();
+            //
+            //        // found suitable trip
+            //        if(trip.time_to > photo.date){
+            //            photo.tripid = snapshot.key();
+            //            snapshot.child(events).forEach(function loop(eventsnapshot){
+            //                // found suitable event
+            //                if(loop.stop) {
+            //                    return;
+            //                }
+            //                var event = eventsnapshot.val()
+            //                if(eventsnapshot.key() <= photo.date && event.time_end >= photo.date){
+            //                    $scope.event.title = event.name;
+            //                    $scope.event.description = event.location;
+            //                    $scope.event.imageList.push(photo);
+            //                    loop.stop = true;
+            //                }
+            //            });
+            //        }
+            //
+            //        $scope.newblog.events.push($scope.event);
+            //    });
+            //
+            //    $scope.event={};
+            //}
+            //else
+            //{
+            //      for (var i=0; i<$scope.newblog.events.length; i++) {
+            //            if($scope.newblog.events[i].title==photo.date){
+            //                $scope.newblog.events[i].imageList.push(photo);
+            //                }
+            //            };
+            //};
+            var newevent = {};
+            var found = false;
+            newevent.title= photo.date;
+            newevent.description="Having fun with Triip@ "+ photo.location;
+            newevent.imageList.push(photo);
+            tripRef.orderByChild("time_from").endAt(photo.date).once("value", function(snapshot) {
+                var trip = snapshot.val();
 
+                // found suitable trip
+                if(trip.time_to > photo.date){
+                    photo.tripid = snapshot.key();
+                    snapshot.child(events).forEach(function loop(eventsnapshot){
+                        // found suitable event
+                        if(loop.stop) {
+                            return;
+                        }
+                        var event = eventsnapshot.val();
+                        if(eventsnapshot.key() <= photo.date && event.time_end >= photo.date){
+                            newevent.title = event.name;
+                            newevent.description = event.location;
+                            //$scope.event.imageList.push(photo);
+                            found = true;
+                            if($scope.newblog.events[eventsnapshot.key()] !== null)
+                                $scope.newblog.events[eventsnapshot.key()].imageList.push(photo);
+                            else{
+                                //newevent.imageList.push(photo);
+                                $scope.newblog.events[eventsnapshot.key()] = newevent;
+                            }
+                            loop.stop = true;
+                        }
+                    });
+                }
+
+                if(!found){
+                    $scope.newblog.events[photo.date] = newevent;
+                }
+            });
         });
+
         if($scope.newblog.events.length==0)
         {
             $scope.event.title= (new Date()).getTime();
             $scope.event.description="Having fun with Triip, sorry no image now";
-            $scope.newblog.events.push($scope.event);
+            $scope.newblog.events[$scope.event.title] = $scope.event;
 
         }
 
@@ -143,9 +210,9 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
 
         EXIF.getData(img, function(exifObject) {
             if (EXIF.getTag(this, "DateTimeOriginal") == null)
-                photo.date = EXIF.getTag(this, "DateTimeOriginal");
+                photo.date = (new Date(EXIF.getTag(this, "DateTimeOriginal"))).getTime();
             else
-                photo.date = EXIF.getTag(this, "DateTime");
+                photo.date = (new Date(EXIF.getTag(this, "DateTime"))).getTime();
 
             // GET LCOCATION NAME FROM LATTITUDE AND LONGTUTUDE
             if(EXIF.getTag(this, "GPSLatitude") !== null && EXIF.getTag(this, "GPSLongitude") !== null) {
