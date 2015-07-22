@@ -1,13 +1,16 @@
-TriipMeApp.controller('resetPasswordController',['$scope','$state','$stateParams',function($scope, $state,$stateParams){
+TriipMeApp.controller('resetPasswordController',['$scope','$ionicPopup','$state','$stateParams',function($scope,$ionicPopup, $state,$stateParams){
 	$('#myTab').css('display','none');
 	$scope.password = {}
 	$scope.password.pass1 = "";
 	$scope.password.pass2 = "";	
 	$scope.resetPassword = resetPassword;
 	$scope.backToLogin = backToLogin;	
+	$scope.showAlert = showAlert;
+	$scope.activateHomeTab = activateHomeTab;
+	
 	function resetPassword(){
 		if ($scope.password.pass1 !== $scope.password.pass2){
-			alert("passwords do not match")
+			$scope.showAlert('passwords you entered did not match');
 		}else{			
 			var userAccount = $stateParams.userAccount;
 			var email = userAccount.email;
@@ -18,8 +21,7 @@ TriipMeApp.controller('resetPasswordController',['$scope','$state','$stateParams
 				oldPassword: oldPassword,
 				newPassword: newPassword,
 			},function(error) {
-				if (error === null) {
-					console.log("Password changed successfully");
+				if (error === null) {					
 					var userId = fb.getAuth().uid;
 					fb.child('database').child('users').child(userId).once('value',function(data){
 						var updateUser = data.val();
@@ -29,12 +31,13 @@ TriipMeApp.controller('resetPasswordController',['$scope','$state','$stateParams
 							NameOfUser = data.child("name").val();
 							AvatarOfUser = data.child("avatar").val();
 							$('#myTab').css('display', 'block');
-						//	$scope.activateHomeTab();
+							$scope.activateHomeTab();
 							$state.go("home");
 						});					
 					})					 										
 				} else {
 					console.log("Error changing password:", error);
+					$scope.showAlert("Crash","something goes wrong, reset password unsuccessfully");
 				}
 			});		
 		}
@@ -43,4 +46,21 @@ TriipMeApp.controller('resetPasswordController',['$scope','$state','$stateParams
 	function backToLogin(){
 		$state.go('login');	
 	}
+	
+	function showAlert(title,template) {
+        var alertPopup = $ionicPopup.alert({
+            title: title,
+            template: template
+        });
+        alertPopup.then(function (res) {
+            //console.log('Thank you for not eating my delicious ice cream cone');
+        });
+    };
+	
+	function activateHomeTab(){
+        $('#homeTab').addClass('active');
+        $('#profileTab').removeClass('active');
+        $('#favoriteTab').removeClass('active');
+        $('#settingTab').removeClass('active');
+    }
 }])
