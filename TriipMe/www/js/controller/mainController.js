@@ -144,6 +144,7 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
     //});
     //console.log($scope.cmts);
 
+    $scope.cmts = [];
     if(!$scope.loaded){
       blogsRef.child(blog.id).child("comments").child("cmts").on("child_added", function(snapshot) {
         $scope.cmts.push(snapshot.val());
@@ -173,7 +174,8 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
 
   $scope.closeModal = function() {
     $scope.loaded = false;
-    blogsRef.child($scope.blog.id).child("comments").child("cmts").off("child_added");
+    if($scope.blog !== {} && $scope.blog.id !== null)
+      blogsRef.child($scope.blog.id).child("comments").child("cmts").off("child_added");
     //ref.off("value");
     $scope.modal.hide();
   };

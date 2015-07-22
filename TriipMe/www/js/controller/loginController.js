@@ -1,10 +1,37 @@
 TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$timeout',function($scope,$ionicPopup,$state,$timeout){
 
     // VARIABLES INITIALIZATION
+    $scope.activateHomeTab = function(){
+        $('#homeTab').addClass('active');
+        $('#profileTab').removeClass('active');
+        $('#favoriteTab').removeClass('active');
+        $('#settingTab').removeClass('active');
+    }
     $scope.logInfo = {};
     $scope.logInfo.username = "";
     $scope.logInfo.password = "";
     $('#myTab').css('display','none');
+
+    //fb.onAuth(function(authData) {
+    //    $scope.show();
+    //    $state.go("home");
+    //    $scope.hide();
+    //    if (fb.getAuth().provider == "facebook") {
+    //        var newUser = {};
+    //        newUser.name = fb.getAuth().facebook.displayName;
+    //        newUser.provider = "facebook";
+    //        newUser.avatar = fb.getAuth().facebook.profileImageURL;
+    //        fb.child("database").child("users").child(fb.getAuth().uid).update(newUser);
+    //        NameOfUser = fb.getAuth().facebook.displayName;
+    //        AvatarOfUser = fb.getAuth().facebook.profileImageURL;
+    //        $('#myTab').css('display','block');
+    //        $scope.activateHomeTab();
+    //        $scope.hide();
+    //        $state.go("home");
+    //    }
+    //
+    //    //$timeout(function(){$scope.hide();},5000);
+    //});
 
     $scope.login = function () {
         $scope.show();
@@ -66,7 +93,10 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$timeo
     //LOGIN WITH FACEBOOK
     $scope.loginwithFacebook = function() {
         $scope.show();
-        fb.authWithOAuthPopup("facebook", function (error, authData) {
+
+        //var ref = window.open('', '_blank', 'location=no');
+
+        fb.authWithOAuthPopup("facebook", function (error,authData) {
             $scope.hide();
             if (error) {
                 //console.log("Login Failed!", error);
@@ -92,12 +122,5 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$timeo
                 //NameOfUser = fb.child("database").child("users").child(fb.getAuth().uid).child("name").val();
             }
         });
-    }
-    
-    $scope.activateHomeTab = function(){
-        $('#homeTab').addClass('active');
-        $('#profileTab').removeClass('active');
-        $('#favoriteTab').removeClass('active');
-        $('#settingTab').removeClass('active');
     }
 }]);
