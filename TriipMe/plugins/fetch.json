@@ -50,7 +50,7 @@
     "com.synconset.imagepicker": {
         "source": {
             "type": "local",
-            "path": "cordova-imagePicker"
+            "path": "imagePicker\\cordova-imagePicker"
         },
         "is_top_level": true,
         "variables": {}
@@ -67,6 +67,22 @@
         "source": {
             "type": "registry",
             "id": "cordova-plugin-inappbrowser"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "org.apache.cordova.inappbrowser": {
+        "source": {
+            "type": "registry",
+            "id": "org.apache.cordova.inappbrowser"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "org.apache.cordova.file": {
+        "source": {
+            "type": "registry",
+            "id": "org.apache.cordova.file"
         },
         "is_top_level": true,
         "variables": {}

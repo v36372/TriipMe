@@ -14,9 +14,9 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
     }
   }
 
-  $('html').click(function(){
-    $scope.closeModal();
-  })
+  //$('html').click(function(){
+  //  $scope.closeModal();
+  //})
   
   $scope.preventClose = function($event){
     $event.stopPropagation();
@@ -174,7 +174,7 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
 
   $scope.closeModal = function() {
     $scope.loaded = false;
-    if($scope.blog !== null)
+    if($scope.blog !== {} && $scope.blog.id !== null)
       blogsRef.child($scope.blog.id).child("comments").child("cmts").off("child_added");
     //ref.off("value");
     $scope.modal.hide();

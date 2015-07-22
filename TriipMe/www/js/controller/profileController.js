@@ -29,7 +29,7 @@ TriipMeApp.controller('profileController',['$scope','$state','$timeout','userSer
 			var blog = snapshot.val();
 			blog.time = (new Date(blog.time)).toDateString();
 			blog.id = snapshot.key();
-			$scope.blogs.push(blog);
+			$scope.blogs.unshift(blog);
 			console.log("fired");
 			$scope.hide();
 		});
