@@ -69,7 +69,11 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$timeo
                     }else{
                         //$scope.hide();
                         $('#myTab').css('display','block');
-                        $scope.activateHomeTab();
+                        $scope.activateHomeTab();                        
+                        if (!$('#accountLog').is(':checked')){
+                            $scope.logInfo.username = "";
+                            $scope.logInfo.password = "";                             
+                        }                        
                         $state.go("home");   
                     }                    
                 });
