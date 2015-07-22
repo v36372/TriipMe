@@ -59,9 +59,7 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
 
         }
         */
-        blogsRef.push($scope.newblog);   
-
-
+        blogsRef.push($scope.newblog);
 
         Camera.cleanup(null,null);    
         $state.go('home');    
@@ -89,14 +87,43 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
 
         };
 
-        $cordovaCamera.getPicture(options).then(function(imageData) {
-            var imgURI = "data:image/jpeg;base64," + imageData;
-            $scope.newblog.img = imageData;
-            $scope.photos.push(imgURI);
-            $('#img-container').css('height','250px')
-        }, function(err) {
-           console.log(err);
-        });
+        //$cordovaCamera.getPicture(options).then(function(imageData) {
+        //    var imgURI = "data:image/jpeg;base64," + imageData;
+        //    $scope.newblog.img = imageData;
+        //    $scope.photos.push(imgURI);
+        //    $('#img-container').css('height','250px')
+        //}, function(err) {
+        //   console.log(err);
+        //});
+        window.imagePicker.getPictures(
+            function(results) {
+                for (var i = 0; i < results.length; i++) {
+                    // DO STUFF HERE
+                    console.log('Image URI: ' + results[i]);
+                    var imgURI = "data:image/jpeg;base64," + results[i];
+                        $scope.newblog.img = results[i];
+                        $scope.photos.push(imgURI);
+                        $('#img-container').css('height','250px')
+                }
+            }, function (error) {
+                console.log('Error: ' + error);
+            }, {
+                // max images to be selected, defaults to 15. If this is set to 1, upon
+                // selection of a single image, the plugin will return it.
+                maximumImagesCount: 10,
+
+                // max width and height to allow the images to be.  Will keep aspect
+                // ratio no matter what.  So if both are 800, the returned image
+                // will be at most 800 pixels wide and 800 pixels tall.  If the width is
+                // 800 and height 0 the image will be 800 pixels wide if the source
+                // is at least that wide.
+                width: 300,
+                height: 300,
+
+                // quality of resized image, defaults to 100
+                quality: 50
+            }
+        );
     }
 
 }]);

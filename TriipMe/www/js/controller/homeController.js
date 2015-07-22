@@ -10,6 +10,13 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
 	if(fb.getAuth().uid == "")
         $state.go("login");
 
+    if(NameOfUser == "" || AvatarOfUser == ""){
+        fb.child("users").child(fb.getAuth().uid).once("value",function(data){
+            NameOfUser = data.child("name").val();
+            AvatarOfUser = data.child("avatar").val();
+        });
+    }
+
     $scope.show();
     // VARIABLES
     $scope.blog = {};
