@@ -110,7 +110,7 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
     //$scope.likeBlog = function(blog){
     //    console.log("like");
     //    console.log(blog.likes.num);
-    //    console.log(blog.id);
+    //    console.log(blog.id);q
     //    blogsRef.child(blog.id).child("likes").child(fb.getAuth().uid).once("value",function(data){
     //        console.log("no");
     //        if(data.val() == null){

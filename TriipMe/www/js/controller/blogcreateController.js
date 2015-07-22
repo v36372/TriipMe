@@ -75,6 +75,27 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
                     $scope.photos.push(imgURI);
                     CordovaExif.readData(imgURI, function(exifObject) {
                         // son code here
+
+                        // GET LCOCATION NAME FROM LATTITUDE AND LONGTUTUDE
+                        //var geocodingAPI = "https://maps.googleapis.com/maps/api/geocode/json?latlng=23.714224,78.961452&key=AIzaSyB6LdCgpr-vnhuf9aC6RfslLWFiq41Bb7k";
+                        //
+                        //$.getJSON(geocodingAPI, function (json) {
+                        //    if (json.status == "OK") {
+                        //        //Check result 0
+                        //        var result = json.results[0];
+                        //        //look for locality tag and administrative_area_level_1
+                        //        var city = "";
+                        //        var state = "";
+                        //        for (var i = 0, len = result.address_components.length; i < len; i++) {
+                        //            var ac = result.address_components[i];
+                        //            if (ac.types.indexOf("administrative_area_level_1") >= 0) state = ac.short_name;
+                        //        }
+                        //        if (state != '') {
+                        //            console.log("Hello to you out there in " + city + ", " + state + "!");
+                        //        }
+                        //    }
+                        //
+                        //});
                     });
 
                     $('#img-container').css('height','250px')
