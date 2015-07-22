@@ -102,7 +102,7 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
         $timeout(function(){
             $scope.$apply();
             $scope.hide();
-        },10000);
+        },3000);
     };
 
     $scope.Init();

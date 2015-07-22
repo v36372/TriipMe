@@ -27,38 +27,38 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
         $scope.newblog.time = (new Date()).getTime();
         $scope.newblog.author = fb.getAuth().uid;
 
-        /* This code should be functional when photo.date is ready
-        $scope.event = {};
-        $scope.photosDate=[];
-        $scope.photos.forEach(function(photo){
+        ////This code should be functional when photo.date is ready
+        //$scope.event = {};
+        //$scope.photosDate=[];
+        //$scope.photos.forEach(function(photo){
+        //
+        //    //if this photo date is the new day, note that each event should be classified by date not exact time (Day 1, day 2, ...)
+        //    if($scope.photosDate.indexOf(photo.date)==-1){
+        //        $scope.photosDate.push(photo.date);
+        //        $scope.event.title= photo.date;
+        //        $scope.event.imageList.push(photo);
+        //        $scope.event.description="Having fun with Triip@ "+ photo.location;
+        //        $scope.newblog.events.push($scope.event);
+        //        $scope.event={};
+        //    }
+        //    else
+        //    {
+        //          for (var i=0; i<$scope.newblog.events.length; i++) {
+        //                if($scope.newblog.events[i].title==photo.date){
+        //                    $scope.newblog.events[i].imageList.push(photo);
+        //                    }
+        //                };
+        //    };
+        //
+        //});
+        //if($scope.newblog.events.length==0)
+        //{
+        //    $scope.event.title= (new Date()).getTime();
+        //    $scope.event.description="Having fun with Triip, sorry no image now";
+        //    $scope.newblog.events.push($scope.event);
+        //
+        //}
 
-            //if this photo date is the new day, note that each event should be classified by date not exact time (Day 1, day 2, ...)
-            if($scope.photosDate.indexOf(photo.date)==-1){
-                $scope.photosDate.push(photo.date);
-                $scope.event.title= photo.date;
-                $scope.event.imageList.push(photo);
-                $scope.event.description="Having fun with Triip@ "+ photo.location;
-                $scope.newblog.events.push($scope.event);
-                $scope.event={};
-            }
-            else
-            {
-                  for (var i=0; i<$scope.newblog.events.length; i++) {
-                        if($scope.newblog.events[i].title==photo.date){
-                            $scope.newblog.events[i].imageList.push(photo);
-                            }                 
-                        };
-            };
-
-        });
-        if($scope.newblog.events.length==0)
-        {
-            $scope.event.title= (new Date()).getTime();
-            $scope.event.description="Having fun with Triip, sorry no image now";
-            $scope.newblog.events.push($scope.event);
-
-        }
-        */
         blogsRef.push($scope.newblog);
         Camera.cleanup(null,null);
         $state.go('home');    
@@ -71,8 +71,11 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
                     // DO STUFF HERE
                     console.log('Image URI: ' + results[i]);
                     var imgURI = "data:image/jpeg;base64," + results[i];
-                    $scope.newblog.img = results[i];
+                    //$scope.newblog.img = results[i];
                     $scope.photos.push(imgURI);
+                    CordovaExif.readData(imgURI, function(exifObject) {
+                        // son code here
+                    });
 
                     $('#img-container').css('height','250px')
                 }
