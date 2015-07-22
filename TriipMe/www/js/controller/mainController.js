@@ -193,4 +193,11 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
   });
 
 
+  $scope.utilDateFormat = function(time){
+    var newDate = new Date(parseInt(time));
+    //console.log(time);
+    //console.log(newDate);
+    return newDate.toLocaleDateString() + " " + newDate.toLocaleTimeString();
+  };
+
 }]);
