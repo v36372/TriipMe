@@ -7,7 +7,7 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
         $('#settingTab').removeClass('active');
     }
 	// .fromTemplate() method
-	if(fb.getAuth().uid == "")
+	if(fb.getAuth() !== null && fb.getAuth().uid == "")
         $state.go("login");
 
     if(NameOfUser == "" || AvatarOfUser == ""){
@@ -54,11 +54,12 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
 
     $scope.Init = function()
     {
-        blogsRef.once("value",function(data){
-            if(data.val() == null)
-                $scope.hide();
-            //$scope.hide();
-        });
+        //blogsRef.once("value",function(data){
+        //    console.log(data.val());
+        //    if(data.val() == null)
+        //        $scope.hide();
+        //    //$scope.hide();
+        //});
 
         blogsRef.orderByChild("time").limitToLast(5).on("child_added", function (snapshot) {
             //var blog = {};
@@ -69,8 +70,8 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
             blog.id = snapshot.key();
             fb.child("database").child("users").child(blog.author).once('value',function(data){
                 blog.authorname = data.child("name").val();
-                blog.authoravatar = data.child("avatar").val();      
-                $scope.blogs.push(blog);
+                blog.authoravatar = data.child("avatar").val();
+                $scope.blogs.unshift(blog);
                 $scope.hide();
             });
 
@@ -86,10 +87,22 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
                     blog.comments = data.val().comments;
                     blog.likes = data.val().likes;
                     console.log(data.val());
+                    $timeout(function(){
+                        $scope.$apply();
+                    },0);
                 });
             });
 
+            $timeout(function(){
+                $scope.$apply();
+            },0);
+
         });
+
+        $timeout(function(){
+            $scope.$apply();
+            $scope.hide();
+        },10000);
     };
 
     $scope.Init();

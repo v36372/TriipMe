@@ -60,50 +60,21 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
         }
         */
         blogsRef.push($scope.newblog);
-
-        Camera.cleanup(null,null);    
+        Camera.cleanup(null,null);
         $state.go('home');    
     };
 
-    $scope.choosePicture = function(){        
-        $scope.imageHandle(Camera.PictureSourceType.PHOTOLIBRARY);        
-    };
-
-    $scope.takePicture = function(){
-        $scope.imageHandle(Camera.PictureSourceType.CAMERA);
-    };
-
-    $scope.imageHandle = function(Type) {
-        var options = {
-            quality : 75,
-            destinationType : Camera.DestinationType.DATA_URL,
-            sourceType : Type,
-            allowEdit : true,
-            encodingType: Camera.EncodingType.JPEG,
-            targetWidth: 300,
-            targetHeight: 300,
-            popoverOptions: CameraPopoverOptions,
-            saveToPhotoAlbum: true
-
-        };
-
-        //$cordovaCamera.getPicture(options).then(function(imageData) {
-        //    var imgURI = "data:image/jpeg;base64," + imageData;
-        //    $scope.newblog.img = imageData;
-        //    $scope.photos.push(imgURI);
-        //    $('#img-container').css('height','250px')
-        //}, function(err) {
-        //   console.log(err);
-        //});
+    $scope.choosePicture = function(){
         window.imagePicker.getPictures(
             function(results) {
                 for (var i = 0; i < results.length; i++) {
                     // DO STUFF HERE
                     console.log('Image URI: ' + results[i]);
                     var imgURI = "data:image/jpeg;base64," + results[i];
-                        $scope.newblog.img = results[i];
-                        $scope.photos.push(imgURI);
-                        $('#img-container').css('height','250px')
+                    $scope.newblog.img = results[i];
+                    $scope.photos.push(imgURI);
+
+                    $('#img-container').css('height','250px')
                 }
             }, function (error) {
                 console.log('Error: ' + error);
@@ -124,7 +95,32 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
                 quality: 50
             }
         );
-    }
+    };
+
+    $scope.takePicture = function(){
+        var options = {
+            quality : 75,
+            destinationType : Camera.DestinationType.DATA_URL,
+            sourceType : Camera.PictureSourceType.CAMERA,
+            allowEdit : true,
+            encodingType: Camera.EncodingType.JPEG,
+            targetWidth: 300,
+            targetHeight: 300,
+            popoverOptions: CameraPopoverOptions,
+            saveToPhotoAlbum: true
+
+        };
+
+        $cordovaCamera.getPicture(options).then(function(imageData) {
+            var imgURI = "data:image/jpeg;base64," + imageData;
+            $scope.newblog.img = imageData;
+            $scope.photos.push(imgURI);
+
+            $('#img-container').css('height','250px')
+        }, function(err) {
+            console.log(err);
+        });
+    };
 
 }]);
 

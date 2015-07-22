@@ -14,9 +14,9 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
     }
   }
 
-  $('html').click(function(){
-    $scope.closeModal();
-  })
+  //$('html').click(function(){
+  //  $scope.closeModal();
+  //})
   
   $scope.preventClose = function($event){
     $event.stopPropagation();

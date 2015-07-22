@@ -12,21 +12,27 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$timeo
     $scope.logInfo.password = "";
     $('#myTab').css('display','none');
 
-    fb.onAuth(function(authData) {
-        if (authData && authData.provider == "facebook") {
-            var newUser = {};
-            newUser.name = fb.getAuth().facebook.displayName;
-            newUser.provider = "facebook";
-            newUser.avatar = fb.getAuth().facebook.profileImageURL;
-            fb.child("database").child("users").child(fb.getAuth().uid).update(newUser);
-            NameOfUser = fb.getAuth().facebook.displayName;
-            AvatarOfUser = fb.getAuth().facebook.profileImageURL;
-            $('#myTab').css('display','block');
-            $scope.activateHomeTab();
-            $scope.hide();
-            $state.go("home");
-        }
-    });
+    //fb.onAuth(function(authData) {
+    //    $scope.show();
+    //    $state.go("home");
+    //    $scope.hide();
+    //    if (fb.getAuth().provider == "facebook") {
+    //        var newUser = {};
+    //        newUser.name = fb.getAuth().facebook.displayName;
+    //        newUser.provider = "facebook";
+    //        newUser.avatar = fb.getAuth().facebook.profileImageURL;
+    //        fb.child("database").child("users").child(fb.getAuth().uid).update(newUser);
+    //        NameOfUser = fb.getAuth().facebook.displayName;
+    //        AvatarOfUser = fb.getAuth().facebook.profileImageURL;
+    //        $('#myTab').css('display','block');
+    //        $scope.activateHomeTab();
+    //        $scope.hide();
+    //        $state.go("home");
+    //    }
+    //
+    //    //$timeout(function(){$scope.hide();},5000);
+    //});
+
     $scope.login = function () {
         $scope.show();
         if ($scope.logInfo.username == "" || $scope.logInfo.password == "") {
@@ -87,7 +93,10 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$timeo
     //LOGIN WITH FACEBOOK
     $scope.loginwithFacebook = function() {
         $scope.show();
-        fb.authWithOAuthRedirect("facebook", function (errora) {
+
+        //var ref = window.open('', '_blank', 'location=no');
+
+        fb.authWithOAuthPopup("facebook", function (error,authData) {
             $scope.hide();
             if (error) {
                 //console.log("Login Failed!", error);
