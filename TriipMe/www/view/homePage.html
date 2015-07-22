@@ -14,7 +14,7 @@
         <!--<ion-spinner ng-show="connected == true" style="margin-left: 50%;" icon="lines" class="spinner-positive"></ion-spinner>-->
 
         <div ng-repeat="item in blogs">
-            <div class="list card">
+            <div class="list card padding-createblog-button">
                 <div class="item item-avatar avatar-custom">
                     <img ng-src={{item.authoravatar}} ng-click="viewProfile(item.author)">
                     <h2 ng-click="viewProfile(item.author)">{{item.authorname}}</h2>
