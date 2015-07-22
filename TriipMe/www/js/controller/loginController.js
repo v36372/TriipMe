@@ -55,14 +55,23 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$timeo
 
                 //if (!$scope.$$phase) {
                 //    $scope.$apply(function() { $location.path("/home"); });
-                //}
+                //}                                
+                
                 fb.child("database").child("users").child(fb.getAuth().uid).once("value", function (data) {
                     NameOfUser = data.child("name").val();
                     AvatarOfUser = data.child("avatar").val();
-                    //$scope.hide();
-                    $('#myTab').css('display','block');
-                    $scope.activateHomeTab();
-                    $state.go("home");
+                    var isFirstLogin = data.child('firstLogin').val();
+                    if (isFirstLogin){                        
+                        var userAccount = {};
+                        userAccount.email = $scope.logInfo.username;
+                        userAccount.password = $scope.logInfo.password;                         
+                        $state.go('resetpassword', {userAccount:userAccount});
+                    }else{
+                        //$scope.hide();
+                        $('#myTab').css('display','block');
+                        $scope.activateHomeTab();
+                        $state.go("home");   
+                    }                    
                 });
                 //NameOfUser = fb.child("database").child("users").child(fb.getAuth().uid).child("name").val();
             }

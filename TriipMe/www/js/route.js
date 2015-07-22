@@ -21,6 +21,15 @@ TriipMeApp.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: "view/loginPage.html",
             controller: "loginController"
         })
+        .state('resetpassword',{
+            params: {
+                userAccount:{},
+            },
+            url:"/resetpassword",
+            templateUrl: 'view/resetPasswordPage.html',
+            controller: 'resetPasswordController',
+            data: {'userAccount':'userAccount'}
+        })
         .state('profile',{
             params: {
                 userid:{}
