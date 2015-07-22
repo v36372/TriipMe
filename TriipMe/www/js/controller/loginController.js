@@ -64,7 +64,11 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$timeo
                     if (isFirstLogin){                        
                         var userAccount = {};
                         userAccount.email = $scope.logInfo.username;
-                        userAccount.password = $scope.logInfo.password;                         
+                        userAccount.password = $scope.logInfo.password;   
+                        if (!$('#accountLog').is(':checked')){
+                            $scope.logInfo.username = "";                                                         
+                        }                      
+                        $scope.logInfo.password = "";
                         $state.go('resetpassword', {userAccount:userAccount});
                     }else{
                         //$scope.hide();
