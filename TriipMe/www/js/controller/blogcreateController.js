@@ -128,7 +128,7 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
         //}
 
         blogsRef.push($scope.newblog);
-        Camera.cleanup(null,null);
+        //Camera.cleanup(null,null);
         $state.go('home');
     };
 
@@ -161,15 +161,18 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
         );
         //var x = document.getElementById("test");
         //var newImg = new Image();
-        //newImg.src = "img/Bush-dog.jpg"
+        //newImg.src = "img/joy.jpg";
+        //EXIF.getData(newImg, function() {
+        //            alert(EXIF.pretty(this));
+        //        });
         //console.log("hello");
         //var x = "data:image/jpeg;base64," + newImg;
-        ////document.getElementById("test").onclick = function() {
-        ////    console.log(this);
-        ////    EXIF.getData(this, function() {
-        ////        alert(EXIF.pretty(this));
-        ////    });
-        ////};
+        //document.getElementById("test").onclick = function() {
+        //    console.log(this);
+        //    EXIF.getData(this, function() {
+        //        alert(EXIF.pretty(this));
+        //    });
+        //};
         //console.log(newImg);
         //EXIF.getData(newImg, function() {
         //    alert(EXIF.pretty(this));
@@ -205,14 +208,18 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
         var imgURI = "data:image/jpeg;base64," + img;
         //$scope.newblog.img = results[i];
 
-        var photo = {};
-        photo.img = imgURI;
+        var photo = new Image();
+        photo.src = imgURI;
 
-        EXIF.getData(img, function(exifObject) {
-            if (EXIF.getTag(this, "DateTimeOriginal") == null)
+        EXIF.getData(photo, function() {
+            if (EXIF.getTag(this, "DateTimeOriginal") == null) {
                 photo.date = (new Date(EXIF.getTag(this, "DateTimeOriginal"))).getTime();
-            else
+                fb.child("test").push(photo);
+            }
+            else{
                 photo.date = (new Date(EXIF.getTag(this, "DateTime"))).getTime();
+                fb.child("test").push(photo);
+            }
 
             // GET LCOCATION NAME FROM LATTITUDE AND LONGTUTUDE
             if(EXIF.getTag(this, "GPSLatitude") !== null && EXIF.getTag(this, "GPSLongitude") !== null) {
