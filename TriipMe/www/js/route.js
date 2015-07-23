@@ -49,6 +49,11 @@ TriipMeApp.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: "view/blogcreatePage.html",
             controller: "blogcreateController"
         })
+        .state("noti", {
+            url: "/noti",
+            templateUrl: "view/notificationPage.html",
+            controller: "notificationController"
+        })
         .state("blogdetails", {
             params: {
                 blogid:{}

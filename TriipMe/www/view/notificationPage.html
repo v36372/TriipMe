@@ -1,13 +1,13 @@
 <ion-view title="Notification">
     <ion-content>
             <div class="list card">
-                <divn ng-repeeat="noti in notiList">
-                    <div class="ion-card" ng-click="gotoBlog(noti.blogid)">
-                        <p>{{noti.time}}</p>
+                <div ng-repeat="noti in notiList">
+                    <div class="card" ng-click="gotoBlog(noti.blogid)">
+                        {{noti.time}}
                         <p ng-if="noti.type=='like'">{{noti.authorname}} liked your blog !</p>
                         <p ng-if="noti.type=='comment'">{{noti.authorname}} commented on your blog !</p>
                     </div>
-                </divn>
+                </div>
             </div>
     </ion-content>
 </ion-view>
