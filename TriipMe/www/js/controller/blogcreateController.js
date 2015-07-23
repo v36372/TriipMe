@@ -149,7 +149,7 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
                     image.src = photo.src;
 
                     image.onload = function(){
-                        EXIF.getData(image, function() {
+                        EXIF.getData(results[i], function() {
                             alert(EXIF.pretty(this));
                             if (EXIF.getTag(this, "DateTimeOriginal") !== null) {
                                 photo.date = (new Date(EXIF.getTag(this, "DateTimeOriginal"))).getTime();
@@ -269,7 +269,7 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
             image.src = photo.src;
 
             image.onload = function(){
-                EXIF.getData(image, function() {
+                EXIF.getData(imgURI, function() {
                     alert(EXIF.pretty(this));
                     if (EXIF.getTag(this, "DateTimeOriginal") !== null) {
                         photo.date = (new Date(EXIF.getTag(this, "DateTimeOriginal"))).getTime();
