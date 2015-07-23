@@ -1,19 +1,33 @@
-TriipMeApp.controller('signupController', ['$scope','$state',function ($scope,$state) {
-    $scope.err = "";
+TriipMeApp.controller('signupController', ['$scope','$state','$timeout',function ($scope,$state,$timeout) {
+    $scope.err = [];
+    $scope.err.message = "";
     $scope.userName = "";
     $scope.userEmail = "";
-    $scope.confirmEmail = "";
+    $scope.confirmEmail = "";    
     $scope.createUser = function() {
         if($scope.userEmail !== $scope.confirmEmail) {
             $scope.err = "Emails you entered did not match";
             return;
         }
+        if ($scope.userEmail === ""){
+             $scope.err = [];              
+             //$scope.err.message = error.toString();
+             var errMessage = "you have not entered your email address yet";                
+             $scope.err.push(errMessage);               
+             return;
+        }
+        var randomstring = Math.random().toString(36).slice(-8);
         fb.createUser({
             email    : $scope.userEmail,
-            password : 'a3dfq23djhql3d23e23c243'
+            password : randomstring,
         }, function(error, userData) {
             if (error) {
-                console.log("Error creating user:", error);
+                console.log("Error creating user:", error.toString());  
+                $scope.err = [];              
+                //$scope.err.message = error.toString();
+                var errMessage = error.toString();                
+                $scope.err.push(errMessage);
+                $scope.$apply();                           
             } else {                
                 var newUser = {};
                 newUser[userData.uid] = {};

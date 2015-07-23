@@ -111,6 +111,11 @@ div.transbox {
 .button-block{
   border-radius: 50px;
 }
+
+.singup-custome{
+  font-size: 12px;   
+}
+
 .button-login{
   width: 50%;
 }
