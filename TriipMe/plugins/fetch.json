@@ -92,7 +92,7 @@
             "type": "registry",
             "id": "cordova-plugin-file"
         },
-        "is_top_level": true,
+        "is_top_level": false,
         "variables": {}
     },
     "cordova-plugin-file-transfer": {
