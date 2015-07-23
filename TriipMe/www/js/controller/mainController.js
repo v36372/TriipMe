@@ -11,6 +11,7 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
     }    
     if ($ionicHistory.backTitle() === 'TriipMe Login'){
       $('#myTab').css('display','none');
+      $('#navBar').css('display','none');
     }
   }
 
@@ -72,6 +73,7 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
         $scope.closePopover();
         fb.unauth();
         $('#myTab').css('display','none');
+        $('#navBar').css('display','none');
         $state.go("login");
       } else {
         console.log('You are not sure');

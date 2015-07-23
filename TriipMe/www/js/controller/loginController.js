@@ -11,6 +11,8 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$timeo
     $scope.logInfo.username = "";
     $scope.logInfo.password = "";
     $('#myTab').css('display','none');
+    $('#navBar').css('display','none');
+    $('#loginPage').css('top','0px');
 
     //fb.onAuth(function(authData) {
     //    $scope.show();
@@ -74,6 +76,7 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$timeo
                     }else{
                         //$scope.hide();
                         $('#myTab').css('display','block');
+                        $('#navBar').css('display','block');
                         $scope.activateHomeTab();                        
                         if (!$('#accountLog').is(':checked')){
                             $scope.logInfo.username = "";
@@ -147,6 +150,7 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$timeo
                     NameOfUser = fb.getAuth().facebook.displayName;
                     AvatarOfUser = fb.getAuth().facebook.profileImageURL;
                     $('#myTab').css('display','block');
+                    $('#navBar').css('display','block');
                     $scope.activateHomeTab();
                     $state.go("home");
                 });

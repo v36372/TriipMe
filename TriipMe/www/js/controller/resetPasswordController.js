@@ -31,6 +31,7 @@ TriipMeApp.controller('resetPasswordController',['$scope','$ionicPopup','$state'
 							NameOfUser = data.child("name").val();
 							AvatarOfUser = data.child("avatar").val();
 							$('#myTab').css('display', 'block');
+							$('#navBar').css('display','block');
 							$scope.activateHomeTab();							 
 							$state.go("home");
 						});					
