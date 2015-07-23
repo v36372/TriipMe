@@ -147,7 +147,9 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
     $scope.cmts = [];
     if(!$scope.loaded){
       blogsRef.child(blog.id).child("comments").child("cmts").on("child_added", function(snapshot) {
-        $scope.cmts.push(snapshot.val());
+        var comment = snapshot.val();
+        comment.time = $scope.utilDateFormat(comment.time);
+        $scope.cmts.push(comment);
       });
       $scope.loaded = true;
     }

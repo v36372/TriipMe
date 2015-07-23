@@ -10,7 +10,7 @@
             <div class="card">
             <div class="item item-avatar item-text-wrap">
                 <img ng-src={{cmt.authoravatar}} ng-click="viewUserProfile(cmt.author)">
-                <h2 ng-click="viewUserProfile(cmt.author)">{{cmt.authorname}}</h2>
+                <h2 ng-click="viewUserProfile(cmt.author)" style="color: #4DADAF;">{{cmt.authorname}}</h2>
                 <p>{{cmt.time}}</p>
                 <p class="item">{{cmt.content}}</p>
             </div>
@@ -19,8 +19,8 @@
         <div class="item item-input-inset">
             <textarea rows="4" placeholder="Comments" ng-model="cmt.content" style="resize:none;width:95%;padding:0 5%;margin-right:5%;">
             </textarea>
-            <button class="button button-small" ng-click="sendComment(blog)">
-                <i class="icon ion-ios-paperplane"></i>
+            <button class="button button-small" style="background-color: #55B6B8; width: 50px"  ng-click="sendComment(blog)">
+                <i class="icon  ion-paper-airplane" style="color: #ffffff;"></i>
             </button>
         </div>
     </ion-content>

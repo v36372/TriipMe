@@ -224,6 +224,10 @@ TriipMeApp.controller('ModalInstanceCtrl', function ($scope) {
     $scope.cmt.content = "";
 
     $scope.sendComment = function(blog){
+        if ($scope.cmt.content === ""){
+            return;
+        }
+        $scope.cmt.time = (new Date()).getTime();
         var blogsRef = fb.child("database").child("blogs");
         blogsRef.child(blog.id).child("comments").child("cmts").once("value",function(data){
             ++blog.comments.num;
@@ -238,7 +242,8 @@ TriipMeApp.controller('ModalInstanceCtrl', function ($scope) {
                     "author":fb.getAuth().uid,
                     "authorname":NameOfUser,
                     "authoravatar":AvatarOfUser,
-                    "content":$scope.cmt.content
+                    "content":$scope.cmt.content,
+                    "time":$scope.cmt.time
                 }
             );
         });
