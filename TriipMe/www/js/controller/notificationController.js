@@ -7,6 +7,7 @@ TriipMeApp.controller('notificationController',['$scope','$state',function($scop
         var noti = snapshot.val();
         noti.time = $scope.utilDateFormat(snapshot.val().time);
         $scope.notiList.push(noti);
+        $('#notifyIcon').css('color','red');
     });
 
     $scope.gotoBlog = function(blogid){
