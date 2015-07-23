@@ -1,4 +1,4 @@
-TriipMeApp.controller('blogdetailsController',['$scope','$cordovaCamera','$state','$stateParams',function($scope,$cordovaCamera,$state,$stateParams){
+TriipMeApp.controller('blogdetailsController',['$scope','$cordovaCamera','$state','$stateParams', '$ionicBackdrop', '$ionicModal', '$ionicSlideBoxDelegate', '$ionicScrollDelegate',function($scope,$cordovaCamera,$state,$stateParams, $ionicBackdrop, $ionicModal, $ionicSlideBoxDelegate, $ionicScrollDelegate){
     if(fb.getAuth().uid == "")
         $state.go("login");
 
@@ -22,11 +22,52 @@ TriipMeApp.controller('blogdetailsController',['$scope','$cordovaCamera','$state
             event.time = $scope.utilDateFormat(eventsnapshot.key());
             event.title = eventsnapshot.child("title").val();
             event.description = eventsnapshot.child("description").val();
+            event.imageList= [{
+                img: 'img/girl.jpg'
+              }, {
+                img: 'img/girl.jpg'
+              }, {
+                img: 'img/girl.jpg'
+              }];
             $scope.blog.events.push(event);
         });
 
         console.log($scope.blog);
     });
+    $scope.zoomMin = 1;
+
+    $scope.showImages = function(index, parentIndex) {
+        $scope.activeSlide = index;
+        $scope.eventImg= $scope.blog.events[parentIndex].imageList;
+        $scope.showModal('view/template/gallery-zoomview.html');
+        };
+ 
+    $scope.showModal = function(templateUrl) {
+      $ionicModal.fromTemplateUrl(templateUrl, {
+        scope: $scope,
+        backdropClickToClose: true
+
+      }).then(function(modal) {
+        $scope.modal = modal;
+        $scope.modal.show();
+      });
+    }
+ 
+    $scope.closeModal = function() {
+      $scope.modal.hide();
+      $scope.modal.remove()
+    };
+     
+    $scope.updateSlideStatus = function(slide) {
+      var zoomFactor = $ionicScrollDelegate.$getByHandle('scrollHandle' + slide).getScrollPosition().zoom;
+      if (zoomFactor == $scope.zoomMin) {
+        $ionicSlideBoxDelegate.enableSlide(true);
+      } else {
+        $ionicSlideBoxDelegate.enableSlide(false);
+      }
+    };
+
+     
 
     //$scope.blog.events = [];
     //$scope.blog.desc = "It was the best thing that ever happened."
