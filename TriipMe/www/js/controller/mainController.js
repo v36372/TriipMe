@@ -124,6 +124,16 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
         obj[fb.getAuth().uid] = true;
 
         blogsRef.child(blog.id).child("likes").update(obj);
+
+        //var userRef = fb.child("database").child("users").child(blog.author);
+        //var noti = {};
+        //var date = (new Date()).getTime();
+        //noti[date] = {};
+        //noti[date].type = "like"; //  CHANGE WITH ACTUAL DATA
+        //noti[date].author = fb.getAuth().uid; //  CHANGE WITH ACTUAL DATA
+        //userRef.child("noti").update(noti);
+
+        $scope.addNoti("like",blog);
       }
     });
   };
@@ -200,6 +210,17 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
     //console.log(time);
     //console.log(newDate);
     return newDate.toLocaleDateString() + " " + newDate.toLocaleTimeString();
+  };
+
+  $scope.addNoti = function(type,blog){
+    var userRef = fb.child("database").child("users").child(blog.author);
+    var noti = {};
+    var date = (new Date()).getTime();
+    noti[date] = {};
+    noti[date].type = type; //  CHANGE WITH ACTUAL DATA
+    noti[date].authorname = NameOfUser; //  CHANGE WITH ACTUAL DATA
+    noti[date].blogid = blog.id;
+    userRef.child("noti").update(noti);
   };
 
 }]);

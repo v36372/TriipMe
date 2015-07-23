@@ -99,6 +99,13 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
 
         });
 
+
+        // NOTIFICATION
+        var userRef = fb.child("database").child("users").child(fb.getAuth().uid);
+        userRef.child("noti").on("child_added",function(snapshot){
+
+        });
+
         $timeout(function(){
             $scope.$apply();
             $scope.hide();
@@ -249,6 +256,23 @@ TriipMeApp.controller('ModalInstanceCtrl', function ($scope) {
         });
 
         $scope.cmt.content = "";
+
+        //var userRef = fb.child("database").child("users").child(blog.author);
+        //userRef.child("noti").push({
+        //    type:"comment",
+        //    author:fb.getAuth().uid
+        //});
+
+        //var userRef = fb.child("database").child("users").child(blog.author);
+        //var noti = {};
+        //var date = (new Date()).getTime();
+        //noti[date] = {};
+        //noti[date].type = "comment"; //  CHANGE WITH ACTUAL DATA
+        //noti[date].author = fb.getAuth().uid; //  CHANGE WITH ACTUAL DATA
+        //userRef.child("noti").update(noti);
+
+        $scope.addNoti("comment",blog);
+
         //$scope.Init();
     };
 });
