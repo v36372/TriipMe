@@ -214,6 +214,10 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
   };
 
   $scope.addNoti = function(type,blog){
+    if(blog.author == fb.getAuth().uid){
+      return;
+    }
+
     var userRef = fb.child("database").child("users").child(blog.author);
     var noti = {};
     var date = (new Date()).getTime();
