@@ -222,8 +222,8 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
     noti[date].authorname = NameOfUser; //  CHANGE WITH ACTUAL DATA
     noti[date].blogid = blog.id;
     noti[date].time = date;
-    userRef.child("noti").child("notiList").update(noti);
     userRef.child("noti").update({"noti_seen":false});
+    userRef.child("noti").child("notiList").update(noti);
   };
 
 }]);
