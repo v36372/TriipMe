@@ -85,7 +85,7 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
             newevent.title= photo.date;
             newevent.description="Having fun with Triip@ "+ photo.location;
             newevent.imageList.push(photo);
-            tripRef.orderByChild("time_from").endAt(photo.date).once("value", function(snapshot) {
+            tripRef.orderByChild("time_from").endAt(photo.date).limitToLast(1).once("value", function(snapshot) {
                 var trip = snapshot.val();
 
                 // found suitable trip
@@ -119,13 +119,13 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
             });
         });
 
-        if($scope.newblog.events.length==0)
-        {
-            $scope.event.title= (new Date()).getTime();
-            $scope.event.description="Having fun with Triip, sorry no image now";
-            $scope.newblog.events[$scope.event.title] = $scope.event;
-
-        }
+        //if($scope.newblog.events.length==0)
+        //{
+        //    $scope.event.title= (new Date()).getTime();
+        //    $scope.event.description="Having fun with Triip, sorry no image now";
+        //    $scope.newblog.events[$scope.event.title] = $scope.event;
+        //
+        //}
 
         blogsRef.push($scope.newblog);
         Camera.cleanup(null,null);
