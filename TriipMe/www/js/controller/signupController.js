@@ -2,15 +2,15 @@ TriipMeApp.controller('signupController', ['$scope','$state',function ($scope,$s
     $scope.err = "";
     $scope.userName = "";
     $scope.userEmail = "";
-    $scope.userPassword = "";
+    $scope.confirmEmail = "";
     $scope.createUser = function() {
-        if($scope.userPassword !== $scope.confirmPassword) {
-            $scope.err = "Passwords do not match";
+        if($scope.userEmail !== $scope.confirmEmail) {
+            $scope.err = "Emails you entered did not match";
             return;
         }
         fb.createUser({
             email    : $scope.userEmail,
-            password : $scope.userPassword
+            password : 'a3dfq23djhql3d23e23c243'
         }, function(error, userData) {
             if (error) {
                 console.log("Error creating user:", error);
@@ -19,10 +19,26 @@ TriipMeApp.controller('signupController', ['$scope','$state',function ($scope,$s
                 newUser[userData.uid] = {};
                 newUser[userData.uid].name = $scope.userName; //  CHANGE WITH ACTUAL DATA
                 newUser[userData.uid].provider = "password"; //  CHANGE WITH ACTUAL DATA
-                newUser[userData.uid].avatar = "img/avatar.jpg"; //  CHANGE WITH ACTUAL DATA          
-                fb.child("database").child("users").update(newUser);                
+                newUser[userData.uid].avatar = "img/avatar.jpg"; //  CHANGE WITH ACTUAL DATA
+                newUser[userData.uid].firstLogin = true;          
+                fb.child("database").child("users").update(newUser);                                
                 $scope.popup.close();
-                $scope.login(newUser[userData.uid]);
+                fb.resetPassword({
+                    email: $scope.userEmail,
+                },function(error){
+                    if (error){
+                        switch (error.code) {
+                            case "INVALID_USER":
+                                console.log("The specified user account does not exist.");
+                                break;
+                            default:
+                                console.log("Error resetting password:", error);
+                        }
+                    }else{
+                        console.log("Password reset email sent successfully!");
+                        alert('signup successfully, please check your email to get the password')
+                    }
+                })
             }
         });
     };
@@ -30,7 +46,7 @@ TriipMeApp.controller('signupController', ['$scope','$state',function ($scope,$s
         console.log('Closing in controller!');
         $scope.popup.close();
     };        
-    $scope.login = function (newUser) {
+    $scope.login = function () {
         $scope.show();        
         fb.authWithPassword({
             email: $scope.userEmail,
@@ -41,11 +57,19 @@ TriipMeApp.controller('signupController', ['$scope','$state',function ($scope,$s
                 console.log("Login Failed!", error);
                 $scope.showAlert();
             } else {
-                fb.child("database").child("users").child(fb.getAuth().uid).update(newUser);
-                fb.child("database").child("users").child(fb.getAuth().uid).child("name").once("value", function (data) {
-                    NameOfUser = data.val();
+                //fb.child("database").child("users").child(fb.getAuth().uid).update(newUser);
+                //fb.child("database").child("users").child(fb.getAuth().uid).child("name").once("value", function (data) {
+                //    NameOfUser = data.val();
+                //    $state.go("home");
+                //});
+                fb.child("database").child("users").child(fb.getAuth().uid).once("value", function (data) {
+                    NameOfUser = data.child("name").val();
+                    AvatarOfUser = data.child("avatar").val();
+                    //$scope.hide();
+                    $('#myTab').css('display','block');
+                    $scope.activateHomeTab();
                     $state.go("home");
-                });                
+                });
             }
         });
     };        

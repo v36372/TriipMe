@@ -37,9 +37,9 @@
     <ion-scroll direction="x" class="available-scroller" id='img-container'>
         <div class="createBlog-list-photo" collection-repeat="photo in photos"
            item-height="250" item-width="300">
-             <img ng-src="{{photo}}"/>
+             <img ng-src="{{photo.img}}"/>
         </div>
-    </ion-scroll>    
+    </ion-scroll>
     <button class="button button-block button-positive triipme-background padding-createblog-button" ng-click="createBlog()">
         Create new Blog
     </button>
