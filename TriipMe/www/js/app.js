@@ -5,6 +5,7 @@ var fb = new Firebase("https://triipme.firebaseio.com");
 var TriipMeApp = angular.module('TriipMeApp', ['ionic','firebase','ngCordova','ngRoute']);
 var NameOfUser = "";
 var AvatarOfUser = "";
+var NotiSeen = true;
 
 TriipMeApp.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {

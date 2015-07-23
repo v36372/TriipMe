@@ -60,6 +60,7 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$timeo
                 fb.child("database").child("users").child(fb.getAuth().uid).once("value", function (data) {
                     NameOfUser = data.child("name").val();
                     AvatarOfUser = data.child("avatar").val();
+                    NotiSeen = data.child("noti").child("noti_seen");
                     var isFirstLogin = data.child('firstLogin').val();
                     if (isFirstLogin){                        
                         var userAccount = {};
@@ -130,12 +131,18 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$timeo
                 newUser.name = fb.getAuth().facebook.displayName;
                 newUser.provider = "facebook";
                 newUser.avatar = fb.getAuth().facebook.profileImageURL;
-                fb.child("database").child("users").child(fb.getAuth().uid).update(newUser);
-                NameOfUser = fb.getAuth().facebook.displayName;
-                AvatarOfUser = fb.getAuth().facebook.profileImageURL;
-                $('#myTab').css('display','block');
-                $scope.activateHomeTab();
-                $state.go("home");
+                newUser.noti = {};
+                fb.child("database").child("users").child(fb.getAuth().uid).child("noti").child("noti_seen").once("value",function(snap){
+                    NotiSeen = snap.val();
+                    console.log(NotiSeen);
+                    newUser.noti.noti_seen = NotiSeen;
+                    fb.child("database").child("users").child(fb.getAuth().uid).update(newUser);
+                    NameOfUser = fb.getAuth().facebook.displayName;
+                    AvatarOfUser = fb.getAuth().facebook.profileImageURL;
+                    $('#myTab').css('display','block');
+                    $scope.activateHomeTab();
+                    $state.go("home");
+                });
                 //NameOfUser = fb.child("database").child("users").child(fb.getAuth().uid).child("name").val();
             }
         });
