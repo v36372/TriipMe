@@ -1,5 +1,6 @@
 /* Empty. Add your own CSS if you like */
-
+.popup-head .popup-title{ background-color: #4FBBBC; color: white}
+.popup-head{background-color: #4FBBBC}
 .createBlog-list-photo {
     display: flex;
     align-items: center;
@@ -118,7 +119,9 @@ div.transbox {
 
 .button-login{
   width: 50%;
+ 
 }
+#button-login{ background-color: #4FBBBC ; color:white}
 #form{
   padding-bottom: 0px;
 }
