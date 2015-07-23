@@ -1,4 +1,4 @@
-TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state',function($scope,$cordovaCamera,$state){
+TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state','$timeout',function($scope,$cordovaCamera,$state,$timeout){
     if(fb.getAuth().uid == "")
         $state.go("login");
 
@@ -133,6 +133,11 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
     };
 
     $scope.choosePicture = function(){
+        //var newImg = new Image();
+        //newImg.src = "img/joy.jpg";
+        //EXIF.getData(newImg, function() {
+        //    alert(EXIF.pretty(this));
+        //});
         window.imagePicker.getPictures(
             function(results) {
                 for (var i = 0; i < results.length; i++) {
@@ -140,9 +145,50 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
                     console.log('Image URI: ' + results[i]);
                     var photo = {};
                     photo.src = results[i];
+                    var image = new Image();
+                    image.src = photo.src;
+
+                    image.onload = function(){
+                        EXIF.getData(results[i], function() {
+                            alert(EXIF.pretty(this));
+                            if (EXIF.getTag(this, "DateTimeOriginal") !== null) {
+                                photo.date = (new Date(EXIF.getTag(this, "DateTimeOriginal"))).getTime();
+                                fb.child("test").push(photo);
+                            }
+                            else{
+                                photo.date = (new Date(EXIF.getTag(this, "DateTime"))).getTime();
+                                fb.child("test").push(photo);
+                            }
+
+                            // GET LCOCATION NAME FROM LATTITUDE AND LONGTUTUDE
+                            if(EXIF.getTag(this, "GPSLatitude") !== null && EXIF.getTag(this, "GPSLongitude") !== null) {
+                                var geocodingAPI = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + EXIF.getTag(this, "GPSLatitude") +"," +  EXIF.getTag(this, "GPSLongitude") + "&key=AIzaSyB6LdCgpr-vnhuf9aC6RfslLWFiq41Bb7k";
+
+                                $.getJSON(geocodingAPI, function (json) {
+                                    if (json.status == "OK") {
+                                        //Check result 0
+                                        var result = json.results[0];
+                                        //look for locality tag and administrative_area_level_1
+                                        var city = "";
+                                        var state = "";
+                                        for (var i = 0, len = result.address_components.length; i < len; i++) {
+                                            var ac = result.address_components[i];
+                                            if (ac.types.indexOf("administrative_area_level_1") >= 0) state = ac.short_name;
+                                        }
+                                        if (state != '') {
+                                            console.log("Hello to you out there in " + city + ", " + state + "!");
+                                            photo.location = city;
+                                        }
+                                    }
+
+                                });
+                            }
+                        });
+                    };
 
                     $scope.photos.push(photo);
-                    $scope.processImg(results[i]);
+                    //$scope.processImg($scope.photos[0]);
+                    $('#img-container').css('height','250px')
                 }
             }, function (error) {
                 console.log('Error: ' + error);
@@ -166,9 +212,15 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
         //var x = document.getElementById("test");
         //var newImg = new Image();
         //newImg.src = "img/joy.jpg";
-        //EXIF.getData(newImg, function() {
-        //            alert(EXIF.pretty(this));
-        //        });
+        //newImg.onload = function(){
+        //    EXIF.getData(newImg, function() {
+        //        alert(EXIF.pretty(this));
+        //    });};
+        //$timeout(function(){
+        //    EXIF.getData(newImg, function() {
+        //        alert(EXIF.pretty(this));
+        //    });
+        //},5000);
         //console.log("hello");
         //var x = "data:image/jpeg;base64," + newImg;
         //document.getElementById("test").onclick = function() {
@@ -212,53 +264,136 @@ TriipMeApp.controller('blogcreateController',['$scope','$cordovaCamera','$state'
 
             var photo = {};
             photo.src = imgURI;
+
+            var image = new Image();
+            image.src = photo.src;
+
+            image.onload = function(){
+                EXIF.getData(imgURI, function() {
+                    alert(EXIF.pretty(this));
+                    if (EXIF.getTag(this, "DateTimeOriginal") !== null) {
+                        photo.date = (new Date(EXIF.getTag(this, "DateTimeOriginal"))).getTime();
+                        fb.child("test").push(photo);
+                    }
+                    else{
+                        photo.date = (new Date(EXIF.getTag(this, "DateTime"))).getTime();
+                        fb.child("test").push(photo);
+                    }
+
+                    // GET LCOCATION NAME FROM LATTITUDE AND LONGTUTUDE
+                    if(EXIF.getTag(this, "GPSLatitude") !== null && EXIF.getTag(this, "GPSLongitude") !== null) {
+                        var geocodingAPI = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + EXIF.getTag(this, "GPSLatitude") +"," +  EXIF.getTag(this, "GPSLongitude") + "&key=AIzaSyB6LdCgpr-vnhuf9aC6RfslLWFiq41Bb7k";
+
+                        $.getJSON(geocodingAPI, function (json) {
+                            if (json.status == "OK") {
+                                //Check result 0
+                                var result = json.results[0];
+                                //look for locality tag and administrative_area_level_1
+                                var city = "";
+                                var state = "";
+                                for (var i = 0, len = result.address_components.length; i < len; i++) {
+                                    var ac = result.address_components[i];
+                                    if (ac.types.indexOf("administrative_area_level_1") >= 0) state = ac.short_name;
+                                }
+                                if (state != '') {
+                                    console.log("Hello to you out there in " + city + ", " + state + "!");
+                                    photo.location = city;
+                                }
+                            }
+
+                        });
+                    }
+                });
+            };
             $scope.photos.push(photo);
-            $scope.processImg(imgURI);
+
+            //$scope.photos.unshift(photo);
+
+            //$scope.processImg($scope.photos[0]);
+            $('#img-container').css('height','250px')
         }, function(err) {
             console.log(err);
         });
     };
 
-    $scope.processImg = function(img){
+    $scope.processImg = function(photo){
 
 
         //var image = new Image();
-        //image.src = img;
-
-        //EXIF.getData(image, function() {
-        //    if (EXIF.getTag(this, "DateTimeOriginal") == null) {
-        //        photo.date = (new Date(EXIF.getTag(this, "DateTimeOriginal"))).getTime();
-        //        fb.child("test").push(photo);
-        //    }
-        //    else{
-        //        photo.date = (new Date(EXIF.getTag(this, "DateTime"))).getTime();
-        //        fb.child("test").push(photo);
-        //    }
+        //image.src = photo.src;
         //
-        //    // GET LCOCATION NAME FROM LATTITUDE AND LONGTUTUDE
-        //    if(EXIF.getTag(this, "GPSLatitude") !== null && EXIF.getTag(this, "GPSLongitude") !== null) {
-        //        var geocodingAPI = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + EXIF.getTag(this, "GPSLatitude") +"," +  EXIF.getTag(this, "GPSLongitude") + "&key=AIzaSyB6LdCgpr-vnhuf9aC6RfslLWFiq41Bb7k";
+        //image.onload = function(){
+        //    EXIF.getData(image, function() {
+        //        if (EXIF.getTag(this, "DateTimeOriginal") == null) {
+        //            photo.date = (new Date(EXIF.getTag(this, "DateTimeOriginal"))).getTime();
+        //            fb.child("test").push(photo);
+        //        }
+        //        else{
+        //            photo.date = (new Date(EXIF.getTag(this, "DateTime"))).getTime();
+        //            fb.child("test").push(photo);
+        //        }
         //
-        //        $.getJSON(geocodingAPI, function (json) {
-        //            if (json.status == "OK") {
-        //                //Check result 0
-        //                var result = json.results[0];
-        //                //look for locality tag and administrative_area_level_1
-        //                var city = "";
-        //                var state = "";
-        //                for (var i = 0, len = result.address_components.length; i < len; i++) {
-        //                    var ac = result.address_components[i];
-        //                    if (ac.types.indexOf("administrative_area_level_1") >= 0) state = ac.short_name;
+        //        // GET LCOCATION NAME FROM LATTITUDE AND LONGTUTUDE
+        //        if(EXIF.getTag(this, "GPSLatitude") !== null && EXIF.getTag(this, "GPSLongitude") !== null) {
+        //            var geocodingAPI = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + EXIF.getTag(this, "GPSLatitude") +"," +  EXIF.getTag(this, "GPSLongitude") + "&key=AIzaSyB6LdCgpr-vnhuf9aC6RfslLWFiq41Bb7k";
+        //
+        //            $.getJSON(geocodingAPI, function (json) {
+        //                if (json.status == "OK") {
+        //                    //Check result 0
+        //                    var result = json.results[0];
+        //                    //look for locality tag and administrative_area_level_1
+        //                    var city = "";
+        //                    var state = "";
+        //                    for (var i = 0, len = result.address_components.length; i < len; i++) {
+        //                        var ac = result.address_components[i];
+        //                        if (ac.types.indexOf("administrative_area_level_1") >= 0) state = ac.short_name;
+        //                    }
+        //                    if (state != '') {
+        //                        console.log("Hello to you out there in " + city + ", " + state + "!");
+        //                        photo.location = city;
+        //                    }
         //                }
-        //                if (state != '') {
-        //                    console.log("Hello to you out there in " + city + ", " + state + "!");
-        //                    photo.location = city;
-        //                }
-        //            }
         //
-        //        });
-        //    }
-        //});
+        //            });
+        //        }
+        //    });
+        //};
+        //
+        ////EXIF.getData(image, function() {
+        ////    if (EXIF.getTag(this, "DateTimeOriginal") == null) {
+        ////        photo.date = (new Date(EXIF.getTag(this, "DateTimeOriginal"))).getTime();
+        ////        fb.child("test").push(photo);
+        ////    }
+        ////    else{
+        ////        photo.date = (new Date(EXIF.getTag(this, "DateTime"))).getTime();
+        ////        fb.child("test").push(photo);
+        ////    }
+        ////
+        ////    // GET LCOCATION NAME FROM LATTITUDE AND LONGTUTUDE
+        ////    if(EXIF.getTag(this, "GPSLatitude") !== null && EXIF.getTag(this, "GPSLongitude") !== null) {
+        ////        var geocodingAPI = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + EXIF.getTag(this, "GPSLatitude") +"," +  EXIF.getTag(this, "GPSLongitude") + "&key=AIzaSyB6LdCgpr-vnhuf9aC6RfslLWFiq41Bb7k";
+        ////
+        ////        $.getJSON(geocodingAPI, function (json) {
+        ////            if (json.status == "OK") {
+        ////                //Check result 0
+        ////                var result = json.results[0];
+        ////                //look for locality tag and administrative_area_level_1
+        ////                var city = "";
+        ////                var state = "";
+        ////                for (var i = 0, len = result.address_components.length; i < len; i++) {
+        ////                    var ac = result.address_components[i];
+        ////                    if (ac.types.indexOf("administrative_area_level_1") >= 0) state = ac.short_name;
+        ////                }
+        ////                if (state != '') {
+        ////                    console.log("Hello to you out there in " + city + ", " + state + "!");
+        ////                    photo.location = city;
+        ////                }
+        ////            }
+        ////
+        ////        });
+        ////    }
+        ////});
+        ////$scope.photos.push(photo);
         $('#img-container').css('height','250px')
     };
 
