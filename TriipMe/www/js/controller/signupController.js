@@ -1,4 +1,4 @@
-TriipMeApp.controller('signupController', ['$scope','$state','$timeout',function ($scope,$state,$timeout) {
+TriipMeApp.controller('signupController', ['$scope','$state','$timeout','$ionicPopup',function ($scope,$state,$timeout,$ionicPopup) {
     $scope.err = [];
     $scope.err.message = "";
     $scope.userName = "";
@@ -50,7 +50,7 @@ TriipMeApp.controller('signupController', ['$scope','$state','$timeout',function
                         }
                     }else{
                         console.log("Password reset email sent successfully!");
-                        alert('signup successfully, please check your email to get the password')
+                        $scope.showAlert('congratulation','signup successfully, please check your email to get the password');                        
                     }
                 })
             }
@@ -60,31 +60,15 @@ TriipMeApp.controller('signupController', ['$scope','$state','$timeout',function
         console.log('Closing in controller!');
         $scope.popup.close();
     };        
-    $scope.login = function () {
-        $scope.show();        
-        fb.authWithPassword({
-            email: $scope.userEmail,
-            password: $scope.userPassword
-        }, function (error, authData) {
-            $scope.hide();
-            if (error) {
-                console.log("Login Failed!", error);
-                $scope.showAlert();
-            } else {
-                //fb.child("database").child("users").child(fb.getAuth().uid).update(newUser);
-                //fb.child("database").child("users").child(fb.getAuth().uid).child("name").once("value", function (data) {
-                //    NameOfUser = data.val();
-                //    $state.go("home");
-                //});
-                fb.child("database").child("users").child(fb.getAuth().uid).once("value", function (data) {
-                    NameOfUser = data.child("name").val();
-                    AvatarOfUser = data.child("avatar").val();
-                    //$scope.hide();
-                    $('#myTab').css('display','block');
-                    $scope.activateHomeTab();
-                    $state.go("home");
-                });
-            }
+    
+     $scope.showAlert = function (title,template) {
+        var alertPopup = $ionicPopup.alert({
+            title: title,
+            template: template
         });
-    };        
+        alertPopup.then(function (res) {
+            //console.log('Thank you for not eating my delicious ice cream cone');
+        });
+     };
+            
 }]);
