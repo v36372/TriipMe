@@ -102,8 +102,12 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
 
         // NOTIFICATION
         var userRef = fb.child("database").child("users").child(fb.getAuth().uid);
+
+        userRef.child("noti").child("noti_seen").on("value",function(snapshot){
+            NotiSeen = snapshot.val();
+        });
+
         userRef.child("noti").on("child_added",function(snapshot){
-            if(!NotiSeen)
                 $('#notifyIcon').css('color','red');
         });
 

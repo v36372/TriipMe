@@ -5,7 +5,7 @@ TriipMeApp.controller('notificationController',['$scope','$state',function($scop
 
     notiRef.update({"noti_seen":NotiSeen});
 
-    notiRef.orderByKey().limitToLast(5).on("child_added",function(snapshot){
+    notiRef.child("notiList").orderByKey().limitToLast(5).on("child_added",function(snapshot){
         var noti = snapshot.val();
         noti.time = $scope.utilDateFormat(snapshot.val().time);
         $scope.notiList.push(noti);
