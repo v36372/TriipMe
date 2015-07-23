@@ -34,7 +34,9 @@ TriipMeApp.controller('signupController', ['$scope','$state','$timeout','$ionicP
                 newUser[userData.uid].name = $scope.userName; //  CHANGE WITH ACTUAL DATA
                 newUser[userData.uid].provider = "password"; //  CHANGE WITH ACTUAL DATA
                 newUser[userData.uid].avatar = "img/avatar.jpg"; //  CHANGE WITH ACTUAL DATA
-                newUser[userData.uid].firstLogin = true;          
+                newUser[userData.uid].firstLogin = true;
+                newUser[userData.uid].noti = {};
+                newUser[userData.uid].noti.noti_seen = true;
                 fb.child("database").child("users").update(newUser);                                
                 $scope.popup.close();
                 fb.resetPassword({
