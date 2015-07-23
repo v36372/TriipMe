@@ -6,8 +6,7 @@ TriipMeApp.controller('notificationController',['$scope','$state',function($scop
     notiRef.orderByKey().on("child_added",function(snapshot){
         var noti = snapshot.val();
         noti.time = $scope.utilDateFormat(snapshot.val().time);
-        $scope.notiList.push(noti);
-        $('#notifyIcon').css('color','red');
+        $scope.notiList.push(noti);        
     });
 
     $scope.gotoBlog = function(blogid){

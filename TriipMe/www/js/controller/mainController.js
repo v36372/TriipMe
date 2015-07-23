@@ -47,6 +47,7 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
     $('#profileTab').removeClass('active');
     $('#favoriteTab').addClass('active');
     $('#settingTab').removeClass('active');
+    $('#notifyIcon').css('color','#11c1f3');
   };
 
   $scope.openPopover = function($event) {
@@ -220,6 +221,7 @@ TriipMeApp.controller('MainController', ['$scope','$state','$ionicPopover','$ion
     noti[date].type = type; //  CHANGE WITH ACTUAL DATA
     noti[date].authorname = NameOfUser; //  CHANGE WITH ACTUAL DATA
     noti[date].blogid = blog.id;
+    noti[date].time = date;
     userRef.child("noti").update(noti);
   };
 
