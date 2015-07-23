@@ -90,11 +90,11 @@
 
 .login-background{
   background: url(../img/background.jpg) no-repeat center center fixed;
-   -webkit-background-size: cover;
+  -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  opacity: 0.6;
+  /*opacity: 0.6;*/
   filter: alpha(opacity=40);
 }
 
