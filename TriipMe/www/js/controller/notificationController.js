@@ -1,9 +1,9 @@
 TriipMeApp.controller('notificationController',['$scope','$state',function($scope,$state){
     $scope.notiList = [];
-    NotiSeen = true;
+    //NotiSeen = true;*
     var notiRef = fb.child("database").child("users").child(fb.getAuth().uid).child("noti");
 
-    notiRef.update({"noti_seen":NotiSeen});
+    notiRef.update({"noti_seen":true});
 
     notiRef.child("notiList").orderByKey().limitToLast(5).on("child_added",function(snapshot){
         var noti = snapshot.val();

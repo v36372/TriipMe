@@ -131,11 +131,18 @@ TriipMeApp.controller('loginController',['$scope','$ionicPopup','$state','$timeo
                 newUser.name = fb.getAuth().facebook.displayName;
                 newUser.provider = "facebook";
                 newUser.avatar = fb.getAuth().facebook.profileImageURL;
-                newUser.noti = {};
-                fb.child("database").child("users").child(fb.getAuth().uid).child("noti").child("noti_seen").once("value",function(snap){
-                    NotiSeen = snap.val();
-                    console.log(NotiSeen);
-                    newUser.noti.noti_seen = NotiSeen;
+                //newUser.noti = {};
+                fb.child("database").child("users").child(fb.getAuth().uid).child("noti").once("value",function(snap){
+                    if (snap.val() !== null){
+                        //var NotiSeen = snap.child("noti_seen").val();
+                        newUser.noti = snap.val();
+                        console.log("haha");
+                    }
+                    else {
+                        newUser.noti = {};
+                        newUser.noti.noti_seen = true;
+                        console.log("firsttime");
+                    }
                     fb.child("database").child("users").child(fb.getAuth().uid).update(newUser);
                     NameOfUser = fb.getAuth().facebook.displayName;
                     AvatarOfUser = fb.getAuth().facebook.profileImageURL;
