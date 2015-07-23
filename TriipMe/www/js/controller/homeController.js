@@ -106,7 +106,7 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
         userRef.child("noti").child("noti_seen").on("value",function(snapshot){
             var NotiSeen = snapshot.val();
             console.log(NotiSeen)
-            if(!NotiSeen)
+            if(NotiSeen != null && !NotiSeen)
                 $('#notifyIcon').css('color','red');
         });
 
