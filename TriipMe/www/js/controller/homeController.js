@@ -105,11 +105,12 @@ TriipMeApp.controller('homeController',['$scope','$state','$timeout','userServic
 
         userRef.child("noti").child("noti_seen").on("value",function(snapshot){
             NotiSeen = snapshot.val();
+            $('#notifyIcon').css('color','red');
         });
 
-        userRef.child("noti").on("child_added",function(snapshot){
-                $('#notifyIcon').css('color','red');
-        });
+        //userRef.child("noti").on("child_added",function(snapshot){
+        //        $('#notifyIcon').css('color','red');
+        //});
 
         $timeout(function(){
             $scope.$apply();
