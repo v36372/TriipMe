@@ -38,7 +38,7 @@
                         </div>-->
                         <a class="item item-list-detail">
                         <ion-scroll direction="x" class="available-scroller">
-                            <img ng-repeat="image in event.imageList" ng-src="{{image.img}}" ng-click="showImages($index, $parent.$index)" class="image-list-thumb"/>
+                            <img ng-repeat="image in event.imgs" ng-src="{{image}}" ng-click="showImages($index, $parent.$index)" class="image-list-thumb"/>
                         </ion-scroll>
                         </a>
 

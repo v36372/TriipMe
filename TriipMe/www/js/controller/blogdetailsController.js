@@ -12,13 +12,12 @@ TriipMeApp.controller('blogdetailsController',['$scope','$cordovaCamera','$state
     //    });
     //}
 
-    fb.child("database").child("blogs").child($scope.blogid).once("value", function(data) {
+    /*fb.child("database").child("blogs").child($scope.blogid).once("value", function(data) {
         $scope.blog = data.val();
         $scope.blog.events = [];
         console.log($scope.blog);
         data.child("events").forEach(function(eventsnapshot){
             var event = {};
-            console.log(eventsnapshot.key());
             event.time = $scope.utilDateFormat(eventsnapshot.key());
             event.title = eventsnapshot.child("title").val();
             event.description = eventsnapshot.child("description").val();
@@ -30,15 +29,48 @@ TriipMeApp.controller('blogdetailsController',['$scope','$cordovaCamera','$state
                 img: 'img/girl.jpg'
               }];
             $scope.blog.events.push(event);
+                        console.log(eventsnapshot.key());
+
         });
 
         console.log($scope.blog);
-    });
+    });*/
+
+    if($scope.blogid.length > 0)
+    {
+        fb.child("database").child("blogs").child($scope.blogid).once("value", function(data) {
+            $scope.blog = data.val();
+        });
+    }
+
+    $scope.blog.events = [];
+    $scope.blog.desc = "We are team #Truust."
+    $scope.blog.img = 'img/blogCover.jpg';
+    $scope.blog.title = "OpEEE APCS 2015"
+
+    var event1 = {};
+    event1.imgs = [];
+    event1.imgs.push('img/event2.jpg');
+    event1.time = (new Date(2015, 07, 17, 8, 13, 0, 0)).toDateString();
+    event1.desc = "Interesting checkpoint session #OpEEE";
+
+    $scope.blog.events.push(event1);
+
+    var event = {};
+    event.imgs = [];
+    event.imgs.push('img/event1.jpg');
+    event.imgs.push('img/event1_2.jpg');
+    event.time = (new Date(2015, 07, 25, 8, 13, 0, 0)).toDateString();
+    event.desc = "Cozy dinner at #Ganh with everyone";
+
+    $scope.blog.events.push(event);
+
     $scope.zoomMin = 1;
 
     $scope.showImages = function(index, parentIndex) {
         $scope.activeSlide = index;
-        $scope.eventImg= $scope.blog.events[parentIndex].imageList;
+        console.log(parentIndex);
+        $scope.eventImg= $scope.blog.events[parentIndex].imgs;
         $scope.showModal('view/template/gallery-zoomview.html');
         };
  
