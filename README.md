@@ -9,9 +9,9 @@ triip.me project - OpEEE - 12CTT - APCS - HCUMS
   - Nguyễn Bá Tuấn Vũ
 
 1) OVERVIEW
-    TriipMe project is a mobile application written in Ionic framework and Firebase, for more information, go to visit: 
-  - http://ionicframework.com
-  - https://www.firebase.com
+  TriipMe project is a mobile application written in Ionic framework and Firebase, for more information, go to visit: 
+- http://ionicframework.com
+- https://www.firebase.com
 
 2) INSTALLATION PREREQUISITE SOFTWARES AND FRAMEWORKS
 - install NodeJS: download here: https://nodejs.org/
