@@ -19,5 +19,5 @@ triip.me project - OpEEE - 12CTT - APCS - HCUMS
 - install Ionic: open cmd and run: npm install -g ionic
 
 3) RUN APPLICATION ON PC
-    After cloning TriipMeApp Repository to your computer and installing all softwares in step 2, go to directory TriipMe, open cmd, and run: ionic serve, then app would be launched automatically to your default browser by the address: http://localhost:8100.
+    After cloning TriipMeApp Repository to your computer and installing all softwares in step 2, go to directory TriipMe, open cmd, and run: ionic serve, then the app would be launched automatically to your default browser by the address: http://localhost:8100
   
